@@ -11,17 +11,15 @@ Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩Ысзgtk+╣даВЁлм╪ЁлпР
 Name:		dia
 Version:	0.93
-Release:	0.%{pre}
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
-#Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/0.92/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/0.93/%{name}-%{version}.tar.bz2
+# Source0-md5:	6c8e5e20a60fc03d5a811ccc8f84d360
 ## this only for snapshots
 ##Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %{snap} | tr . -).tar.gz
-## this for pre releases
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}-%{pre}.tar.bz2
-# Source0-md5:	9a1596cd53cc0a80b15898cc1ab0b374
 #Patch0:		dia-state.patch
 Patch1:		%{name}-home_etc.patch
 Patch2:		%{name}-locale-names.patch
@@ -92,8 +90,7 @@ PostScript(TM).
 а також експортувати ╖х в PostScript(TM).
 
 %prep
-#%setup -q
-%setup -q -n %{name}-%{version}-%{pre}
+%setup -q
 #%patch0 -p1
 %patch1 -p1
 %patch2 -p1
