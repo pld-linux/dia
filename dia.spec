@@ -1,4 +1,4 @@
-%define	snap	20030824.0723
+%define	snap	20030902.0723
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
 Summary(pl):	Dia - program do tworzenia diagramСw
@@ -7,8 +7,8 @@ Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩Ысзgtk+╣даВЁлм╪ЁлпР
 Name:		dia
-Version:	0.91
-Release:	3.%{snap}.1
+Version:	0.92
+Release:	0.%{snap}.1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -17,7 +17,7 @@ Vendor:		James Henstridge <james@daa.com.au>
 #Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}.tar.bz2
 # this only for snapshots
 Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %{snap} | tr . -).tar.gz
-# Source0-md5:	61873a739cbb559c56ea6de2fb2ba898
+# Source0-md5:	e373090fa4cf8ea2da3b57fe434ed11d
 Patch0:		dia-state.patch
 Patch1:		dia-am.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
@@ -88,8 +88,7 @@ PostScript(TM).
 %{__autoheader}
 %{__autoconf}
 %{__automake}
-%configure \
-	--enable-gnome
+%configure
 %{__make}
 
 %install
@@ -98,23 +97,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	Applicationsdir=%{_desktopdir}
-
-#Fixme!!!!!!
-#Dirty hack for desktop file
-echo "Categories=Application;Office;" >> $RPM_BUILD_ROOT%{_desktopdir}/dia.desktop
-
-# for libxslt plugin; DIA_PLUGIN_PATH is required by libxslt plugin, so set
-# it before running dia app
-mv $RPM_BUILD_ROOT%{_bindir}/dia $RPM_BUILD_ROOT%{_bindir}/dia.bin
-
-cat > $RPM_BUILD_ROOT%{_bindir}/dia <<END
-#!/bin/sh
-
-DIA_PLUGIN_PATH=%{_datadir}/dia/plugins
-export DIA_PLUGIN_PATH
-
-exec %{_bindir}/dia.bin
-END
 
 %find_lang %{name} --with-gnome
 
