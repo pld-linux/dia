@@ -15,6 +15,7 @@ BuildRequires:	zlib-devel
 BuildRequires:	imlib-devel
 BuildRequires:	gettext-devel
 Requires:	gtk+ >= 1.2.0
+Requires: libxml >= 1.8.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
