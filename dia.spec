@@ -43,7 +43,7 @@ BuildRequires:	popt-devel
 BuildRequires:	python-devel >= 2.3
 BuildRequires:	python-pygtk-devel
 Requires:	python-modules >= 2.3
-Requires:	python-pygtk
+Requires:	python-pygtk-gtk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
