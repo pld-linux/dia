@@ -5,6 +5,7 @@ Summary(pl):	Dia - program do tworzenia diagramСw
 Summary(pt_BR):	Programa para desenho de diagramas
 Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
+Summary(zh_CN):	╩Ысзgtk+╣даВЁлм╪ЁлпР
 Name:		dia
 Version:	0.90
 Release:	4
@@ -13,7 +14,7 @@ License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
 # this for final releases
-Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}.tar.gz
 # this only for snapshots
 #Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
 Patch0:		%{name}-automake.patch
