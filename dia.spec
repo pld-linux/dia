@@ -1,4 +1,6 @@
 
+%define snap 20021002.0723
+
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
 Summary(pl):	Dia - program do tworzenia diagramСw
@@ -8,30 +10,22 @@ Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩Ысзgtk+╣даВЁлм╪ЁлпР
 Name:		dia
 Version:	0.90
-Release:	4
+Release:	1.%{snap}
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
 # this for final releases
-Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}.tar.gz
+#Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}.tar.gz
 # this only for snapshots
-#Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
-Patch0:		%{name}-automake.patch
+Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	bonobo-devel
-BuildRequires:	freetype-devel
-BuildRequires:	gdk-pixbuf-devel
-BuildRequires:	gnome-print-devel
 BuildRequires:	gettext-devel
 BuildRequires:	intltool
-BuildRequires:	libunicode-devel >= 0.7-1.cvs.20020919
-BuildRequires:	libxml-devel
-BuildRequires:	popt-devel
-Requires:	libxml >= 1.8.7
-BuildRequires:	libunicode >= 0.7-1.cvs.20020919
+BuildRequires:	libgnomeui-devel
+BuildRequires:	libxslt-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -86,16 +80,13 @@ PostScript(TM).
 а також експортувати ╖х в PostScript(TM).
 
 %prep
-%setup -q
-%patch0 -p1
+#%setup -q
+%setup -q -n dia-cvs-snapshot
 
 %build
 ./autogen.sh
 %configure \
-	--enable-bonobo \
-	--enable-freetype \
-	--enable-gnome \
-	--enable-gnome-print
+	--enable-gnome
 %{__make}
 
 %install
@@ -125,4 +116,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/dia
 %{_datadir}/mime-info/*
 %{_pixmapsdir}/*
-#%{_sysconfdir}/CORBA/servers/*
