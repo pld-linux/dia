@@ -1,5 +1,5 @@
 
-%define snap 20030130.0823
+%define pre pre2
 
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
@@ -10,13 +10,13 @@ Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩Ысзgtk+╣даВЁлм╪ЁлпР
 Name:		dia
 Version:	0.91
-Release:	0.pre1
+Release:	0.%{pre}
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
 # this for final releases
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}-pre1.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}-%{pre}.tar.bz2
 # this only for snapshots
 #Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
@@ -26,6 +26,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	libgnomeui-devel
 BuildRequires:	libxslt-devel
+BuildRequires:	popt-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -77,7 +78,7 @@ PostScript(TM).
 
 %prep
 #%setup -q
-%setup -q -n %{name}-%{version}-pre1
+%setup -q -n %{name}-%{version}-%{pre}
 #%setup -q -n dia-cvs-snapshot
 
 %build
