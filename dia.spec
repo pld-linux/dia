@@ -15,6 +15,7 @@ BuildPrereq:	XFree86-devel
 BuildPrereq:	libxml-devel
 BuildPrereq:	zlib-devel
 BuildPrereq:	imlib-devel
+BuildPrereq:	gettext
 Requires:	gtk+ >= 1.2.0
 BuildRoot:	/tmp/%{name}-%{version}-root
 
