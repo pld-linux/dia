@@ -2,7 +2,7 @@ Summary:	Dia - a gtk+ based diagram creation program
 Summary(pl):	Dia - program do tworzenie diagramów
 Name:		dia
 Version:	0.86
-Release:	5
+Release:	6
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -11,16 +11,16 @@ Group(pl):	X11/Aplikacje/Grafika
 Vendor:		James Henstridge <james@daa.com.au>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar.gz
 Patch0:		%{name}-automake.patch
-Patch1:		dia-build-patch.patch
-Patch2:		dia-build-with-bonobo.patch
+Patch1:		%{name}-build-patch.patch
+Patch2:		%{name}-build-with-bonobo.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	bonobo-devel >= 0.28
+BuildRequires:	bonobo-devel >= 1.0
 BuildRequires:	gdk-pixbuf-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.2.0
-BuildRequires:	gnome-print-devel
+BuildRequires:	gnome-print-devel >= 0.28
 BuildRequires:	libxml-devel
 Requires:	libxml >= 1.8.7
 BuildRequires:	popt-devel
@@ -52,10 +52,10 @@ formacie oraz eksportowaæ je do postscriptu.
 %patch2 -p1
 
 %build
+gettextize --copy --force
 aclocal
 autoconf
 automake -a -c
-gettextize --copy --force
 %configure \
 	--enable-gnome \
 	--enable-gnome-print \
