@@ -11,7 +11,7 @@ Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩ЫсзGTK+╣даВЁлм╪ЁлпР
 Name:		dia
 Version:	0.94
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
