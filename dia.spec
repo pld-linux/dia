@@ -27,6 +27,7 @@ BuildRequires:	intltool
 BuildRequires:	libunicode-devel
 BuildRequires:	libxml-devel
 BuildRequires:	popt-devel
+BuildRequires:	gtk+-devel
 Requires:	libxml >= 1.8.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
