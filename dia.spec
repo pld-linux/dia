@@ -9,16 +9,16 @@ Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩Ысзgtk+╣даВЁлм╪ЁлпР
 Name:		dia
-Version:	0.90
-Release:	1.%{snap}
+Version:	0.91
+Release:	0.pre1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
 # this for final releases
-#Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}.tar.gz
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}-pre1.tar.bz2
 # this only for snapshots
-Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
+#Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -77,12 +77,13 @@ PostScript(TM).
 
 %prep
 #%setup -q
-%setup -q -n dia-cvs-snapshot
+%setup -q -n %{name}-%{version}-pre1
+#%setup -q -n dia-cvs-snapshot
 
 %build
-./autogen.sh
+#./autogen.sh
 %configure \
-	--disable-gnome
+	--enable-gnome
 %{__make}
 
 %install
@@ -90,7 +91,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	Applicationsdir=%{_applnkdir}/Graphics
+	Applicationsdir=%{_datadir}/applications
+
+#Fixme!!!!!!
+#Dirty hack for desktop file
+echo "Categories=Application;Office;" >> $RPM_BUILD_ROOT%{_datadir}/applications/dia.desktop
 
 %find_lang %{name} --with-gnome
 
@@ -103,13 +108,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 
 %dir %{_libdir}/dia
-%attr(755,root,root) %{_libdir}/dia/lib*.so.*
+#%attr(755,root,root) %{_libdir}/dia/lib*.so.*
 %attr(755,root,root) %{_libdir}/dia/lib*.so
 %{_libdir}/dia/lib*.la
 
 %{_mandir}/man1/*
 
-%{_applnkdir}/Graphics/dia.desktop
+%{_datadir}/applications/dia.desktop
 %{_datadir}/dia
 %{_datadir}/mime-info/*
 %{_pixmapsdir}/*
