@@ -46,11 +46,11 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/X11/applnk/Graphics
+install -d $RPM_BUILD_ROOT/usr/X11R6/share/applnk/Graphics
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/applnk/Graphics
+install %{SOURCE1} $RPM_BUILD_ROOT/usr/X11R6/share/applnk/Graphics
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/dia/lib*.so.*.*
 
@@ -64,7 +64,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc *.gz
-/etc/X11/applnk/Graphics/dia.desktop
+/usr/X11R6/share/applnk/Graphics/dia.desktop
 %attr(755,root,root) %{_bindir}/dia
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so*
