@@ -17,11 +17,10 @@ BuildRequires:	zlib-devel
 BuildRequires:	imlib-devel
 BuildRequires:	gettext-devel
 Requires:	gtk+ >= 1.2.0
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
-%define		_applnkdir	%{_datadir}/applnk
 
 %description
 Dia is a program designed to be much like the Windows program 'Visio'. It 
