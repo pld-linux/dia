@@ -39,8 +39,9 @@ i zapisywaæ diagramy we w³asnym formacie oraz eksportowaæ je do postscriptu.
 %setup -q
 
 %build
-%configure \
-	--prefix=%{_prefix}
+gettextize --copy --force
+LDFLAGS="-s"; export LDFLAGS
+%configure
 make
 
 %install
@@ -53,12 +54,16 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/%{name}
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/dia/lib*.so.*.*
 
+%find_lang %{name}
+
+gzip -9nf AUTHORS NEWS README TODO
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README TODO
+%doc *.gz
 %attr(755,root,root) %{_bindir}/dia
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so*
