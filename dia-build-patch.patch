@@ -1,0 +1,22 @@
+--- dia-0.86/objects/custom/shape_info.c.mdk	Tue Aug  1 07:24:15 2000
++++ dia-0.86/objects/custom/shape_info.c	Mon Aug  7 10:45:09 2000
+@@ -19,7 +19,7 @@
+  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+  */
+ #include <stdlib.h>
+-#include <tree.h>
++/*#include <tree.h>*/
+ #include <parser.h>
+ #include <float.h>
+ #include <ctype.h>
+--- dia-0.86/plug-ins/svg/render_svg.c.mdk	Tue Aug  1 06:49:17 2000
++++ dia-0.86/plug-ins/svg/render_svg.c	Mon Aug  7 11:06:43 2000
+@@ -32,7 +32,7 @@
+ #endif
+ 
+ #include "config.h"
+-#include <tree.h>
++/*#include <tree.h>*/
+ #include "geometry.h"
+ #include "render.h"
+ #include "filter.h"
