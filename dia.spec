@@ -1,3 +1,6 @@
+
+%define snap 20020425.0723
+
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
 Summary(pl):	Dia - program do tworzenia diagramСw
@@ -5,13 +8,16 @@ Summary(pt_BR):	Programa para desenho de diagramas
 Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
 Name:		dia
-Version:	0.88.1
-Release:	6
+Version:	0.89.0
+Release:	0.cvs.%{snap}
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
-Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar.gz
+# this for final releases
+#Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
+# this only for snapshots
+Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
 Patch0:		%{name}-automake.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	gdk-pixbuf-devel
@@ -20,6 +26,8 @@ BuildRequires:	popt-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
+BuildRequires:	intltool
+BuildRequires:	freetype-devel
 Requires:	libxml >= 1.8.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -75,16 +83,12 @@ PostScript(TM).
 а також експортувати ╖х в PostScript(TM).
 
 %prep
-%setup -q
+%setup -q -n %{name}-cvs-snapshot
 %patch0 -p1
 
 %build
-rm -f missing
-aclocal
-autoconf
-autoheader
-automake -a -c -f
-%configure
+./autogen.sh
+%configure --enable-freetype --enable-gnome
 %{__make}
 
 %install
@@ -96,7 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 
 gzip -9nf AUTHORS NEWS README TODO
 
-%find_lang %{name}
+%find_lang %{name} --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -104,13 +108,16 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc *.gz
-%{_applnkdir}/Graphics/dia.desktop
 %attr(755,root,root) %{_bindir}/*
-#%{_sysconfdir}/CORBA/servers/*
+
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so
 %attr(755,root,root) %{_libdir}/dia/lib*.la
-%{_datadir}/dia
-%{_pixmapsdir}/*
-%{_datadir}/mime-info/*
+
 %{_mandir}/man1/*
+
+%{_applnkdir}/Graphics/dia.desktop
+%{_datadir}/dia
+%{_datadir}/mime-info/*
+%{_pixmapsdir}/*
+#%{_sysconfdir}/CORBA/servers/*
