@@ -88,7 +88,7 @@ PostScript(TM).
 
 %build
 ./autogen.sh
-%configure --enable-freetype --enable-gnome
+%configure
 %{__make}
 
 %install
