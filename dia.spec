@@ -1,8 +1,8 @@
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(pl):	Dia - program do tworzenie diagramów
 Name:		dia
-Version:	0.86
-Release:	6
+Version:	0.88
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -11,8 +11,6 @@ Group(pl):	X11/Aplikacje/Grafika
 Vendor:		James Henstridge <james@daa.com.au>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar.gz
 Patch0:		%{name}-automake.patch
-Patch1:		%{name}-build-patch.patch
-Patch2:		%{name}-build-with-bonobo.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -22,8 +20,9 @@ BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.2.0
 BuildRequires:	gnome-print-devel >= 0.28
 BuildRequires:	libxml-devel
-Requires:	libxml >= 1.8.7
+BuildRequires:	oaf-devel
 BuildRequires:	popt-devel
+Requires:	libxml >= 1.8.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -48,8 +47,6 @@ formacie oraz eksportowaæ je do postscriptu.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
 gettextize --copy --force
@@ -69,7 +66,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	Applicationsdir=%{_applnkdir}/Graphics
 
-gzip -9nf AUTHORS NEWS README TODO doc/*
+gzip -9nf AUTHORS NEWS README TODO
 
 %find_lang %{name}
 
@@ -81,7 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc *.gz
 %{_applnkdir}/Graphics/dia.desktop
 %attr(755,root,root) %{_bindir}/*
-%{_sysconfdir}/CORBA/servers/*
+#%{_sysconfdir}/CORBA/servers/*
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so
 %attr(755,root,root) %{_libdir}/dia/lib*.la
