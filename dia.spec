@@ -11,7 +11,7 @@ Summary(uk):	ðÒÏÇÒÁÍÁ ÄÌÑ ÍÁÌÀ×ÁÎÎÑ Ä¦ÁÇÒÁÍ
 Summary(zh_CN):	»ùÓÚgtk+µÄÁ÷³ÌÍ¼³ÌÐò
 Name:		dia
 Version:	0.92.2
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -23,16 +23,27 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/0.92/%{name}-%{version}.tar.
 ## this for pre releases
 ##Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}-%{pre}.tar.bz2
 #Patch0:		dia-state.patch
-Patch1:		dia-am.patch
+Patch1:		%{name}-am.patch
 Patch2:		%{name}-home_etc.patch
+Patch3:		%{name}-locale-names.patch
+Patch4:		%{name}-ft_includes.patch
+Patch5:		%{name}-python.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	intltool
-BuildRequires:	libgnomeui-devel
+BuildRequires:	intltool >= 0.21
+BuildRequires:	libart_lgpl-devel
+BuildRequires:	libgnomeui-devel >= 2.0.0
+BuildRequires:	libpng-devel
 BuildRequires:	libtool
+BuildRequires:	libxml2-devel >= 2.3.9
 BuildRequires:	libxslt-devel
+BuildRequires:	popt-devel
+BuildRequires:	python-devel >= 2.3
+BuildRequires:	python-pygtk-devel
+Requires:	python-modules >= 2.3
+Requires:	python-pygtk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -88,6 +99,11 @@ PostScript(TM).
 #%patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+
+mv po/{no,nb}.po
 
 %build
 %{__libtoolize}
@@ -95,7 +111,10 @@ PostScript(TM).
 %{__autoheader}
 %{__autoconf}
 %{__automake}
-%configure
+%configure \
+	--enable-gnome \
+	--with-python
+
 %{__make}
 
 %install
