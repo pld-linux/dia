@@ -1,6 +1,6 @@
 
 #%%define	snap	20030908.0723
-#%define	pre		pre5
+%define		pre		pre3
 
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
@@ -10,24 +10,22 @@ Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩Ысзgtk+╣даВЁлм╪ЁлпР
 Name:		dia
-Version:	0.92.2
-Release:	4
+Version:	0.93
+Release:	0.%{pre}
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/0.92/%{name}-%{version}.tar.bz2
-# Source0-md5:	2c14d023bd905e65368ee3df3248dc2a
+#Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/0.92/%{name}-%{version}.tar.bz2
 ## this only for snapshots
 ##Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %{snap} | tr . -).tar.gz
 ## this for pre releases
-##Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}-%{pre}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}-%{pre}.tar.bz2
+# Source0-md5:	9a1596cd53cc0a80b15898cc1ab0b374
 #Patch0:		dia-state.patch
-Patch1:		%{name}-am.patch
-Patch2:		%{name}-home_etc.patch
-Patch3:		%{name}-locale-names.patch
-Patch4:		%{name}-ft_includes.patch
-Patch5:		%{name}-python.patch
+Patch1:		%{name}-home_etc.patch
+Patch2:		%{name}-locale-names.patch
+Patch3:		%{name}-python.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -94,14 +92,12 @@ PostScript(TM).
 а також експортувати ╖х в PostScript(TM).
 
 %prep
-%setup -q
-#%setup -q -n %{name}-%{version}-%{pre}
+#%setup -q
+%setup -q -n %{name}-%{version}-%{pre}
 #%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
 
 mv po/{no,nb}.po
 
