@@ -23,6 +23,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	intltool
+BuildRequires:	alsa-lib-devel
 BuildRequires:	libgnomeui-devel
 BuildRequires:	libxslt-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
