@@ -11,7 +11,7 @@ Summary(uk):	ðÒÏÇÒÁÍÁ ÄÌÑ ÍÁÌÀ×ÁÎÎÑ Ä¦ÁÇÒÁÍ
 Summary(zh_CN):	»ùÓÚGTK+µÄÁ÷³ÌÍ¼³ÌÐò
 Name:		dia
 Version:	0.94
-Release:	4
+Release:	5
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -25,10 +25,11 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/0.94/%{name}-%{version}.
 Patch2:		%{name}-locale-names.patch
 Patch3:		%{name}-python.patch
 Patch4:		%{name}-desktop.patch
-URL:		http://www.lysator.liu.se/~alla/dia/dia.html
+URL:		http://www.gnome.org/projects/dia/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
+BuildRequires:	howl-devel >= 0.9.10
 BuildRequires:	intltool >= 0.21
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libgnomeui-devel >= 2.0.0
