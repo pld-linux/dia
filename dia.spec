@@ -11,7 +11,6 @@ Source:		ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar
 Patch:		dia-applnkdir.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	gtk+-devel >= 1.2.0
-BuildRequires:	XFree86-devel
 BuildRequires:	libxml-devel
 BuildRequires:	zlib-devel
 BuildRequires:	imlib-devel
