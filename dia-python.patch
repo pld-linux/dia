@@ -1,0 +1,27 @@
+diff -urN aa/dia-0.92.2/acinclude.m4 dia-0.92.2/acinclude.m4
+--- aa/dia-0.92.2/acinclude.m4	2002-03-09 23:22:42.000000000 +0100
++++ dia-0.92.2/acinclude.m4	2004-03-13 00:39:43.668347464 +0100
+@@ -211,7 +211,7 @@
+ [AC_REQUIRE([AM_PATH_PYTHON])
+ AC_REQUIRE([AM_CHECK_PYTHON_HEADERS])
+ 
+-AC_MSG_CHECKING(for libpython${PYTHON_VERSION}.a)
++AC_MSG_CHECKING(for libpython${PYTHON_VERSION})
+ 
+ py_exec_prefix=`$PYTHON -c "import sys; print sys.exec_prefix"`
+ 
+@@ -222,13 +222,8 @@
+   py_basemodlibs=`sed -n -e 's/^BASEMODLIBS=\(.*\)/\1/p' $py_makefile`
+   py_other_libs=`sed -n -e 's/^LIBS=\(.*\)/\1/p' $py_makefile`
+ 
+-dnl now the actual libpython
+-  if test -e "${py_exec_prefix}/lib/python${PYTHON_VERSION}/config/libpython${PYTHON_VERSION}.a"; then
+-    PYTHON_LIBS="-L${py_exec_prefix}/lib/python${PYTHON_VERSION}/config -lpython${PYTHON_VERSION} $py_localmodlibs $py_basemodlibs $py_other_libs"
++    PYTHON_LIBS="-lpython${PYTHON_VERSION} $py_localmodlibs $py_basemodlibs $py_other_libs"
+     AC_MSG_RESULT(found)
+-  else
+-    AC_MSG_RESULT(not found)
+-  fi
+ else
+   AC_MSG_RESULT(not found)
+ fi
