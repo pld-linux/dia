@@ -1,7 +1,7 @@
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(pl):	Dia - program do tworzenie diagramów
 Name:		dia
-Version:	0.80
+Version:	0.81
 Release:	1
 Copyright:	GPL
 Group:		X11/Applications/Graphics
