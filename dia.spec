@@ -1,17 +1,17 @@
-Summary:     Dia - a gtk+ based diagram creation program
-Summary(pl): Dia - bazuj±cy na gtk+ program do tworzenie diagramów
-Name:        dia
-Version:     0.20
-Release:     2
-Copyright:   GPL
-Group:       X11/Applications/Graphics
-Group(pl):   X11/Aplikacje/Grafika
-Vendor:      Alexander Larsson <alla@lysator.liu.se>
-Source0:     http://www.lysator.liu.se/~alla/dia/%{name}-%{version}.tar.gz
-Source1:     %{name}.wmconfig
-URL:         http://www.lysator.liu.se/~alla/dia/dia.html
-Requires:    gtk+ >= 1.1.1
-BuildRoot:   /tmp/%{name}-%{version}-root
+Summary:	Dia - a gtk+ based diagram creation program
+Summary(pl):	Dia - program do tworzenie diagramów
+Name:		dia
+Version:	0.30
+Release:	1
+Copyright:	GPL
+Group:		X11/Applications/Graphics
+Group(pl):	X11/Aplikacje/Grafika
+Vendor:		Alexander Larsson <alla@lysator.liu.se>
+Source0:	http://www.lysator.liu.se/~alla/dia/%{name}-%{version}.tar.gz
+Source1:	%{name}.wmconfig
+URL:		http://www.lysator.liu.se/~alla/dia/dia.html
+Requires:	gtk+ = 1.2.0
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 Dia is a program designed to be much like the Windows program 'Visio'. It
@@ -31,14 +31,16 @@ i zapisywaæ diagramy we w³asnym formacie oraz eksportowaæ je do postscriptu.
 %setup -q
 
 %build
-./configure --prefix=/usr/X11R6
-make CFLAGS="$RPM_OPT_FLAGS"
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
+./configure \
+	--prefix=/usr/X11R6
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/X11/wmconfig
 
-make install prefix=$RPM_BUILD_ROOT/usr/X11R6
+make install DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/%{name}
 
@@ -56,6 +58,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755, root, root) /usr/X11R6/lib/dia/lib*.la
 
 %changelog
+* Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.30-1]
+- changed way passing $RPM_OPT_FLAGS,
+- updated requires (gtk+ = 1.2.0),
+- "make install" with using DESTDIR.
+
 * Sat Sep 26 1998 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
   [0.20-2]
 - added pl translation.
