@@ -1,14 +1,13 @@
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(pl):	Dia - program do tworzenie diagramów
 Name:		dia
-Version:	0.84
+Version:	0.85
 Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
 Vendor:		James Henstridge <james@daa.com.au>
-Source:		ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar.gz
-Patch:		dia-applnkdir.patch
+Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar.gz
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	gtk+-devel >= 1.2.0
 BuildRequires:	libxml-devel
@@ -22,26 +21,24 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_mandir		%{_prefix}/man
 
 %description
-Dia is a program designed to be much like the Windows program 'Visio'. It 
-can be used to draw different kind of diagrams. In this first version there 
-is support for UML static structure diagrams (class diagrams) and Network 
-diagrams. It can currently load and save diagrams to a custom fileformat 
-and export to postscript.   
+Dia is a program designed to be much like the Windows program 'Visio'.
+It can be used to draw different kind of diagrams. In this first
+version there is support for UML static structure diagrams (class
+diagrams) and Network diagrams. It can currently load and save
+diagrams to a custom fileformat and export to postscript.
 
 %description -l pl
-Dia jest programem zaprojektowanym tak by byæ podobnym do programu 'Visio' 
-znanego z Windows. Dia mo¿e byæ u¿ywany do rysowania ró¿nego rodzaju 
-diagramów. W tej wersji znajduje siê wsparcie dla diagramów o statycznej 
-strukturze UML (diagramy klasowe) i dla diagramów sieciowych. Aktualnie 
-mo¿e on ³adowaæ i zapisywaæ diagramy we w³asnym formacie oraz eksportowaæ 
-je do postscriptu.   
+Dia jest programem zaprojektowanym tak by byæ podobnym do programu
+'Visio' znanego z Windows. Dia mo¿e byæ u¿ywany do rysowania ró¿nego
+rodzaju diagramów. W tej wersji znajduje siê wsparcie dla diagramów o
+statycznej strukturze UML (diagramy klasowe) i dla diagramów
+sieciowych. Aktualnie mo¿e on ³adowaæ i zapisywaæ diagramy we w³asnym
+formacie oraz eksportowaæ je do postscriptu.
 
 %prep
 %setup -q
-%patch -p1
 
 %build
-automake
 gettextize --copy --force
 LDFLAGS="-s"; export LDFLAGS
 %configure
@@ -50,7 +47,9 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 
-make install DESTDIR=$RPM_BUILD_ROOT
+make install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	Applicationsdir=%{_applnkdir}/Graphics
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/dia/lib*.so
 
