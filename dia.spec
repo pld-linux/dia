@@ -20,14 +20,15 @@ Patch0:		%{name}-automake.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	bonobo-devel
 BuildRequires:	freetype-devel
 BuildRequires:	gdk-pixbuf-devel
+BuildRequires:	gnome-print-devel
 BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	libunicode-devel
 BuildRequires:	libxml-devel
 BuildRequires:	popt-devel
-BuildRequires:	gtk+-devel
 Requires:	libxml >= 1.8.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -88,7 +89,11 @@ PostScript(TM).
 
 %build
 ./autogen.sh
-%configure
+%configure \
+	--enable-bonobo \
+	--enable-freetype \
+	--enable-gnome \
+	--enable-gnome-print
 %{__make}
 
 %install
