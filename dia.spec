@@ -2,7 +2,7 @@ Summary:	Dia - a gtk+ based diagram creation program
 Summary(pl):	Dia - program do tworzenie diagramów
 Name:		dia
 Version:	0.86
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -16,7 +16,7 @@ Patch2:		dia-build-with-bonobo.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	bonobo-devel
+BuildRequires:	bonobo-devel >= 0.28
 BuildRequires:	gdk-pixbuf-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.2.0
