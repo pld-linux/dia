@@ -51,11 +51,8 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_applnkdir}/Graphics
 
 make install DESTDIR=$RPM_BUILD_ROOT
-
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Graphics
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/dia/lib*.so
 
