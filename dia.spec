@@ -64,7 +64,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc *.gz
-/etc/X11/applnk/Graphics/dia.dektop
+/etc/X11/applnk/Graphics/dia.desktop
 %attr(755,root,root) %{_bindir}/dia
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so*
