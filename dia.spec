@@ -20,14 +20,14 @@ Vendor:		James Henstridge <james@daa.com.au>
 Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
 Patch0:		%{name}-automake.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
-BuildRequires:	gdk-pixbuf-devel
-BuildRequires:	libxml-devel
-BuildRequires:	popt-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	freetype-devel
+BuildRequires:	gdk-pixbuf-devel
 BuildRequires:	gettext-devel
 BuildRequires:	intltool
-BuildRequires:	freetype-devel
+BuildRequires:	libxml-devel
+BuildRequires:	popt-devel
 Requires:	libxml >= 1.8.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
