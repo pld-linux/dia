@@ -10,7 +10,8 @@ Vendor:		Alexander Larsson <alla@lysator.liu.se>
 Source0:	http://www.lysator.liu.se/~alla/dia/files/%{name}-%{version}.tar.gz
 Source1:	dia.wmconfig
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
-Requires:	gtk+ = 1.2.1
+BuildPrereq:	gtk+-devel
+Requires:	gtk+ >= 1.2.0
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -58,6 +59,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /usr/X11R6/lib/dia/lib*.la
 
 %changelog
+* Wed Apr 21 1999 Piotr Czerwiñski <pius@pld.org.pl>
+  [0.41-2]
+- recompiled on rpm 3.
+
 * Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.30-1]
 - changed way passing $RPM_OPT_FLAGS,
