@@ -38,7 +38,7 @@ i zapisywaæ diagramy we w³asnym formacie oraz eksportowaæ je do postscriptu.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure \
+./configure %{_target} \
 	--prefix=/usr/X11R6
 make
 
