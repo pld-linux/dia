@@ -7,7 +7,7 @@ Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
 Name:		dia
 Version:	0.90
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
