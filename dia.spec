@@ -81,9 +81,9 @@ PostScript(TM).
 %build
 rm -f missing
 aclocal
-autoconf
+%{__autoconf}
 autoheader
-automake -a -c -f
+%{__automake}
 %configure
 %{__make}
 
