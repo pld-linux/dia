@@ -26,7 +26,6 @@ BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	libgnomeui-devel
 BuildRequires:	libxslt-devel
-BuildRequires:	popt-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -98,6 +97,19 @@ rm -rf $RPM_BUILD_ROOT
 #Dirty hack for desktop file
 echo "Categories=Application;Office;" >> $RPM_BUILD_ROOT%{_datadir}/applications/dia.desktop
 
+# for libxslt plugin; DIA_PLUGIN_PATH is required by libxslt plugin, so set
+# it before running dia app
+mv $RPM_BUILD_ROOT%{_bindir}/dia $RPM_BUILD_ROOT%{_bindir}/dia.bin
+
+cat > $RPM_BUILD_ROOT%{_bindir}/dia <<END
+#!/bin/sh
+
+DIA_PLUGIN_PATH=%{_datadir}/dia/plugins
+export DIA_PLUGIN_PATH
+
+exec %{_bindir}/dia.bin
+END
+
 %find_lang %{name} --with-gnome
 
 %clean
@@ -109,7 +121,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 
 %dir %{_libdir}/dia
-#%attr(755,root,root) %{_libdir}/dia/lib*.so.*
 %attr(755,root,root) %{_libdir}/dia/lib*.so
 %{_libdir}/dia/lib*.la
 
