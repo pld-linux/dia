@@ -7,7 +7,7 @@ Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
 Name:		dia
 Version:	0.90
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -26,10 +26,11 @@ BuildRequires:	gdk-pixbuf-devel
 BuildRequires:	gnome-print-devel
 BuildRequires:	gettext-devel
 BuildRequires:	intltool
-BuildRequires:	libunicode-devel
+BuildRequires:	libunicode-devel >= 0.7-1.cvs.20020919
 BuildRequires:	libxml-devel
 BuildRequires:	popt-devel
 Requires:	libxml >= 1.8.7
+BuildRequires:	libunicode >= 0.7-1.cvs.20020919
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
