@@ -1,8 +1,8 @@
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(pl):	Dia - program do tworzenie diagramów
 Name:		dia
-Version:	0.41
-Release:	5
+Version:	0.80
+Release:	1
 Copyright:	GPL
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
@@ -19,7 +19,8 @@ BuildRequires:	gettext-devel
 Requires:	gtk+ >= 1.2.0
 BuildRoot:	/tmp/%{name}-%{version}-root
 
-%define _prefix /usr/X11R6
+%define		_prefix		/usr/X11R6
+%define		_mandir		%{_prefix}/man
 
 %description
 Dia is a program designed to be much like the Windows program 'Visio'. It
@@ -52,7 +53,9 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/usr/X11R6/share/applnk/Graphics
 
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/dia/lib*.so.*.*
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/dia/lib*.so
+
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/*
 
 %find_lang %{name}
 
@@ -67,5 +70,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/X11R6/share/applnk/Graphics/dia.desktop
 %attr(755,root,root) %{_bindir}/dia
 %dir %{_libdir}/dia
-%attr(755,root,root) %{_libdir}/dia/lib*.so*
+%attr(755,root,root) %{_libdir}/dia/lib*.so
 %attr(755,root,root) %{_libdir}/dia/lib*.la
+%{_datadir}/dia
+%{_datadir}/pixmaps/*
+%{_mandir}/man1/*
