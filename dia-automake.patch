@@ -1,0 +1,22 @@
+--- dia-0.86/app/Makefile.am	Tue Aug  8 07:03:05 2000
++++ dia-0.86.new/app/Makefile.am	Tue Aug  8 07:03:36 2000
+@@ -154,7 +154,7 @@
+ 	$(APP_LIBS) $(XML_LIBS) $(BONOBO_LIBS) $(GDK_IMLIB_LIBS) \
+ 	$(LIBART_LIBS) $(PNG_LIBS) $(GDK_PIXBUF_LIBS) $(INTLLIBS)
+ 
+-LDFLAGS = -export-dynamic
++dia_embedd_LDFLAGS = -export-dynamic
+ 
+ EXTRA_DIST = \
+ 	dia.gnorba \
+--- dia-0.86/configure.in	Wed Aug  2 16:55:21 2000
++++ dia-0.86.new/configure.in	Tue Aug  8 07:06:00 2000
+@@ -11,7 +11,7 @@
+ 
+ dnl Initialize libtool
+ AC_DISABLE_STATIC
+-AC_PROG_LIBTOOL
++AM_PROG_LIBTOOL
+ 
+ dnl Build time sanity check
+ AM_SANITY_CHECK
