@@ -2,28 +2,33 @@ Summary:	Dia - a gtk+ based diagram creation program
 Summary(pl):	Dia - program do tworzenie diagramów
 Name:		dia
 Version:	0.86
-Release:	1
+Release:	2
+Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
+Group(de):	X11/Applikationen/Grafik
 Group(pl):	X11/Aplikacje/Grafika
 Vendor:		James Henstridge <james@daa.com.au>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar.gz
-Patch0:		dia-automake.patch
+Patch0:		%{name}-automake.patch
+Patch1:		dia-build-patch.patch
+Patch2:		dia-build-with-bonobo.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	bonobo-devel
+BuildRequires:	gdk-pixbuf-devel
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+-devel >= 1.2.0
-BuildRequires:	imlib-devel
+BuildRequires:	gnome-libs-devel >= 1.2.0
+BuildRequires:	gnome-print-devel
 BuildRequires:	libxml-devel
-BuildRequires:	popt-devel
-BuildRequires:	zlib-devel
-Requires:	gtk+ >= 1.2.0
 Requires:	libxml >= 1.8.7
+BuildRequires:	popt-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
+%define		_sysconfdir	/etc/X11/GNOME
 
 %description
 Dia is a program designed to be much like the Windows program 'Visio'.
@@ -42,14 +47,18 @@ formacie oraz eksportowaæ je do postscriptu.
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 autoconf
 automake
 gettextize --copy --force
-LDFLAGS="-s"; export LDFLAGS
-%configure
+%configure \
+	--enable-gnome \
+	--enable-gnome-print \
+	--enable-bonobo
 %{__make}
 
 %install
@@ -58,10 +67,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	Applicationsdir=%{_applnkdir}/Graphics
-
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/dia/lib*.so
-
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/*
 
 gzip -9nf AUTHORS NEWS README TODO
 
@@ -74,10 +79,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz
 %{_applnkdir}/Graphics/dia.desktop
-%attr(755,root,root) %{_bindir}/dia
+%attr(755,root,root) %{_bindir}/*
+%{_sysconfdir}/CORBA/servers/*
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so
 %attr(755,root,root) %{_libdir}/dia/lib*.la
 %{_datadir}/dia
 %{_datadir}/pixmaps/*
+%{_datadir}/mime-info/*
+%{_datadir}/oaf/*
 %{_mandir}/man1/*
