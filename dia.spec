@@ -16,6 +16,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	gtk+-devel >= 1.2.0
 BuildRequires:	imlib-devel
 BuildRequires:	libxml-devel
+BuildRequires:	popt-devel
 BuildRequires:	zlib-devel
 Requires:	gtk+ >= 1.2.0
 Requires:	libxml >= 1.8.7
