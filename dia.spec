@@ -5,21 +5,29 @@ Summary(pt_BR):	Programa para desenho de diagramas
 Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
 Name:		dia
-Version:	0.88.1
-Release:	6
+Version:	0.90
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
+# this for final releases
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar.gz
+# this only for snapshots
+#Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
 Patch0:		%{name}-automake.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
-BuildRequires:	gdk-pixbuf-devel
-BuildRequires:	libxml-devel
-BuildRequires:	popt-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	bonobo-devel
+BuildRequires:	freetype-devel
+BuildRequires:	gdk-pixbuf-devel
 BuildRequires:	gettext-devel
+BuildRequires:	gnome-libs-devel
+BuildRequires:	intltool
+BuildRequires:	libxml-devel
+BuildRequires:	libunicode-devel
+BuildRequires:	popt-devel
 Requires:	libxml >= 1.8.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -84,7 +92,11 @@ aclocal
 %{__autoconf}
 autoheader
 %{__automake}
-%configure
+%configure \
+	--enable-gnome \
+	--enable-gnome-print \
+	--enable-bonobo \
+	--enable-freetype
 %{__make}
 
 %install
@@ -94,23 +106,24 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	Applicationsdir=%{_applnkdir}/Graphics
 
-gzip -9nf AUTHORS NEWS README TODO
-
-%find_lang %{name}
+%find_lang %{name} --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz
-%{_applnkdir}/Graphics/dia.desktop
+%doc AUTHORS NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
 #%{_sysconfdir}/CORBA/servers/*
+
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so
-%attr(755,root,root) %{_libdir}/dia/lib*.la
-%{_datadir}/dia
-%{_pixmapsdir}/*
-%{_datadir}/mime-info/*
+
 %{_mandir}/man1/*
+
+%{_applnkdir}/Graphics/dia.desktop
+%{_datadir}/dia
+%{_datadir}/mime-info/*
+%{_datadir}/oaf/GNOME_Dia.oaf
+%{_pixmapsdir}/*
