@@ -1,16 +1,16 @@
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(pl):	Dia - program do tworzenie diagramów
 Name:		dia
-Version:	0.30
+Version:	0.40
 Release:	1
 Copyright:	GPL
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
 Vendor:		Alexander Larsson <alla@lysator.liu.se>
-Source0:	http://www.lysator.liu.se/~alla/dia/%{name}-%{version}.tar.gz
-Source1:	%{name}.wmconfig
+Source0:	http://www.lysator.liu.se/~alla/dia/files/%{name}-%{version}.tar.gz
+Source1:	dia.wmconfig
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
-Requires:	gtk+ = 1.2.0
+Requires:	gtk+ = 1.2.1
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -50,12 +50,12 @@ strip $RPM_BUILD_ROOT/usr/X11R6/{bin/*,lib/dia/lib*.so.*.*}
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 %doc AUTHORS NEWS README TODO
-%attr(755, root, root) /usr/X11R6/bin/dia
+%attr(755,root,root) /usr/X11R6/bin/dia
 %dir /usr/X11R6/lib/dia
-%attr(755, root, root) /usr/X11R6/lib/dia/lib*.so*
-%attr(755, root, root) /usr/X11R6/lib/dia/lib*.la
+%attr(755,root,root) /usr/X11R6/lib/dia/lib*.so*
+%attr(755,root,root) /usr/X11R6/lib/dia/lib*.la
 
 %changelog
 * Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
