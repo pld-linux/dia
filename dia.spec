@@ -19,6 +19,9 @@ BuildRequires:	gnome-print-devel >= 0.28
 BuildRequires:	libxml-devel
 BuildRequires:	oaf-devel
 BuildRequires:	popt-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	gettext-devel
 Requires:	libxml >= 1.8.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
