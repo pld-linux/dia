@@ -5,6 +5,7 @@ Version:     0.20
 Release:     2
 Copyright:   GPL
 Group:       X11/Applications/Graphics
+Group(pl):   X11/Aplikacje/Grafika
 Vendor:      Alexander Larsson <alla@lysator.liu.se>
 Source0:     http://www.lysator.liu.se/~alla/dia/%{name}-%{version}.tar.gz
 Source1:     %{name}.wmconfig
