@@ -1,6 +1,6 @@
 
 #%%define	snap	20030908.0723
-%define	pre		pre5
+#%define	pre		pre5
 
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
@@ -11,16 +11,17 @@ Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩Ысзgtk+╣даВЁлм╪ЁлпР
 Name:		dia
 Version:	0.92
-Release:	1.%{pre}.1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}-%{pre}.tar.bz2
-# Source0-md5:	360d5cdda826a260711c4e25266b30be
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	d8782b443a663accad2a7890643d8a23
 ## this only for snapshots
 ##Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %{snap} | tr . -).tar.gz
-# this for pre releases
+## this for pre releases
+##Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}-%{pre}.tar.bz2
 Patch0:		dia-state.patch
 Patch1:		dia-am.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
@@ -80,7 +81,8 @@ PostScript(TM).
 а також експортувати ╖х в PostScript(TM).
 
 %prep
-%setup -q -n %{name}-%{version}-%{pre}
+%setup -q
+#%setup -q -n %{name}-%{version}-%{pre}
 %patch0 -p1
 %patch1 -p1
 
