@@ -39,8 +39,7 @@ i zapisywaæ diagramy we w³asnym formacie oraz eksportowaæ je do postscriptu.
 %setup -q
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure %{_target_platform} \
+%configure \
 	--prefix=%{_prefix}
 make
 
