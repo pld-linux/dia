@@ -1,12 +1,11 @@
-diff -urN dia-0.93-pre3.orig/configure.in dia-0.93-pre3/configure.in
---- dia-0.93-pre3.orig/configure.in	2004-04-16 11:49:20.282635224 +0200
-+++ dia-0.93-pre3/configure.in	2004-04-16 11:50:50.039990032 +0200
-@@ -217,7 +217,7 @@
+--- dia-0.94/configure.in.orig	2004-08-17 17:03:26.000000000 +0200
++++ dia-0.94/configure.in	2004-08-19 23:07:43.042796952 +0200
+@@ -230,7 +230,7 @@
  GETTEXT_PACKAGE=dia
  AC_SUBST(GETTEXT_PACKAGE)
  AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[Needed for glib gettext])
--ALL_LINGUAS="am az be ca cs da de el en_CA en_GB es fi fr ga hr hu is it ja ko mk mn ml ms nl nn no pl pt pt_BR ro ru sk sl sq sr sr@Latn sv tr uk vi zh_CN zh_TW"
-+ALL_LINGUAS="am az be ca cs da de el en_CA en_GB es fi fr ga hr hu is it ja ko mk mn ml ms nb nl nn pl pt pt_BR ro ru sk sl sq sr sr@Latn sv tr uk vi zh_CN zh_TW"
+-ALL_LINGUAS="am az be ca cs da de el en_CA en_GB es fi fr ga gu hr hu is it ja ko mk mn ml ms nl nn no pl pt pt_BR ro ru sk sl sq sr sr@Latn sv tr uk vi zh_CN zh_TW"
++ALL_LINGUAS="am az be ca cs da de el en_CA en_GB es fi fr ga gu hr hu is it ja ko mk mn ml ms nb nl nn pl pt pt_BR ro ru sk sl sq sr sr@Latn sv tr uk vi zh_CN zh_TW"
  AM_GLIB_GNU_GETTEXT
  
  dnl INTLOBJS doesn't seem to always get subst'ed, but I believe it's
