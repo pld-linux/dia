@@ -1,6 +1,4 @@
 
-%define snap 20020425.0723
-
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
 Summary(pl):	Dia - program do tworzenia diagramСw
@@ -8,16 +6,16 @@ Summary(pt_BR):	Programa para desenho de diagramas
 Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
 Name:		dia
-Version:	0.89.0
-Release:	0.cvs.%{snap}
+Version:	0.90
+Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
 # this for final releases
-#Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
+Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar.gz
 # this only for snapshots
-Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
+#Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
 Patch0:		%{name}-automake.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	autoconf
@@ -83,7 +81,7 @@ PostScript(TM).
 а також експортувати ╖х в PostScript(TM).
 
 %prep
-%setup -q -n %{name}-cvs-snapshot
+%setup -q
 %patch0 -p1
 
 %build
@@ -98,8 +96,6 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	Applicationsdir=%{_applnkdir}/Graphics
 
-gzip -9nf AUTHORS NEWS README TODO
-
 %find_lang %{name} --with-gnome
 
 %clean
@@ -107,7 +103,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
 
 %dir %{_libdir}/dia
