@@ -1,0 +1,211 @@
+diff -Nur dia-0.91-pre3.orig/objects/UML/state.c dia-0.91-pre3/objects/UML/state.c
+--- dia-0.91-pre3.orig/objects/UML/state.c	Sun Jan 26 07:44:52 2003
++++ dia-0.91-pre3/objects/UML/state.c	Mon Feb 24 10:46:59 2003
+@@ -1,6 +1,9 @@
+ /* Dia -- an diagram creation/manipulation program
+  * Copyright (C) 1998 Alexander Larsson
+  *
++ * State type for UML diagrams
++ * Copyright (C) 2003 Alejandro Sierra <asierra@servidor.unam.mx>
++ * 
+  * This program is free software; you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation; either version 2 of the License, or
+@@ -51,9 +54,12 @@
+   ConnectionPoint connections[8];
+ 
+   Text *text;
+-  int state_type;
++  int state_type;  
+ 
+   TextAttributes attrs;
++
++  int show_internals;
++  Text *internals;
+ };
+ 
+ 
+@@ -126,13 +132,15 @@
+       Warning: break this and you'll get angry UML users after you. */
+   { "type", PROP_TYPE_INT, PROP_FLAG_NO_DEFAULTS|PROP_FLAG_LOAD_ONLY,
+     "hack", NULL, NULL },
+-  
+   PROP_STD_TEXT_FONT,
+   PROP_STD_TEXT_HEIGHT,
+   PROP_STD_TEXT_COLOUR,
+-  { "text", PROP_TYPE_TEXT, 0, N_("Text"), NULL, NULL }, 
+-  
+-  PROP_DESC_END
++  { "text", PROP_TYPE_TEXT, 0, N_("Text"), NULL, NULL },  
++  { "show_internals", PROP_TYPE_BOOL, PROP_FLAG_VISIBLE,
++    N_("Show internals"),NULL,NULL},
++  { "internals", PROP_TYPE_TEXT, 0, N_("Internals"), NULL, NULL },
++  { NULL, 0, 0, NULL, NULL, NULL, 0} 
++//  PROP_DESC_END
+ };
+ 
+ static PropDescription *
+@@ -142,7 +150,7 @@
+ }
+ 
+ static PropOffset state_offsets[] = {
+-  ELEMENT_COMMON_PROPERTIES_OFFSETS,
++  ELEMENT_COMMON_PROPERTIES_OFFSETS,     
+   {"text",PROP_TYPE_TEXT,offsetof(State,text)},
+   {"text_font",PROP_TYPE_FONT,offsetof(State,attrs.font)},
+   {"text_height",PROP_TYPE_REAL,offsetof(State,attrs.height)},
+@@ -152,7 +160,8 @@
+       if sizeof(enum) != sizeof(int), we're toast.             -- CC
+       */
+   { "type", PROP_TYPE_INT, offsetof(State, state_type) },
+-  
++  { "show_internals", PROP_TYPE_BOOL, offsetof(State, show_internals) },
++   {"internals",PROP_TYPE_TEXT,offsetof(State,internals)},
+   { NULL, 0, 0 },
+ };
+ 
+@@ -167,9 +176,14 @@
+ static void
+ state_set_props(State *state, GPtrArray *props)
+ {
++   TextAttributes attrs;
++   
+   object_set_props_from_offsets(&state->element.object,
+                                 state_offsets,props);
+   apply_textattr_properties(props,state->text,"text",&state->attrs);
++  attrs = state->attrs;
++  attrs.alignment = ALIGN_LEFT;
++  apply_textattr_properties(props,state->internals,"internals",&attrs);
+   state_update_data(state);
+ }
+ 
+@@ -184,8 +198,12 @@
+ state_select(State *state, Point *clicked_point,
+ 	       DiaRenderer *interactive_renderer)
+ {
+-  text_set_cursor(state->text, clicked_point, interactive_renderer);
+-  text_grab_focus(state->text, &state->element.object);
++  Text *text = (state->show_internals && clicked_point->y >=
++       state->internals->position.y - state->internals->height) ?
++        state->internals : state->text;
++   
++  text_set_cursor(text, clicked_point, interactive_renderer);
++  text_grab_focus(text, &state->element.object);
+   element_update_handles(&state->element);
+ }
+ 
+@@ -229,27 +247,7 @@
+   renderer_ops->set_linewidth(renderer, STATE_LINEWIDTH);
+   renderer_ops->set_linestyle(renderer, LINESTYLE_SOLID);
+ 
+-  if (state->state_type!=STATE_NORMAL) {
+-      p1.x = x + w/2;
+-      p1.y = y + h/2;
+-      if (state->state_type==STATE_END) {
+-	  r = STATE_ENDRATIO;
+-	  renderer_ops->fill_ellipse(renderer, 
+-				      &p1,
+-				      r, r,
+-				      &color_white);
+-	  
+-	  renderer_ops->draw_ellipse(renderer, 
+-				      &p1,
+-				      r, r,
+-				      &color_black);
+-      }  
+-      r = STATE_RATIO;
+-      renderer_ops->fill_ellipse(renderer, 
+-				  &p1,
+-				  r, r,
+-				  &color_black);
+-  } else {
++  if (state->state_type==STATE_NORMAL) {
+       p1.x = x;
+       p1.y = y;
+       p2.x = x + w;
+@@ -257,14 +255,28 @@
+       renderer_ops->fill_rounded_rect(renderer, &p1, &p2, &color_white, 0.5);
+       renderer_ops->draw_rounded_rect(renderer, &p1, &p2, &color_black, 0.5);
+       text_draw(state->text, renderer);
+-  }
++      if (state->show_internals) {
++	 p1.x = x; p2.x = x + w;
++	 p1.y = p2.y = state->internals->position.y - state->internals->ascent
++	   - 0.5*STATE_MARGIN_Y;
++      
++	 renderer_ops->set_linewidth(renderer, 0.1);
++	 renderer_ops->draw_line(renderer,
++				 &p1, &p2,
++				 &color_black);
++	 
++	 text_draw(state->internals, renderer);
++      }     
++  } else {
++     message_warning(_("Please use initial/final state instead"));
++  } 
+ }
+ 
+ 
+ static void
+ state_update_data(State *state)
+ {
+-  real w, h;
++  real w=0, h=0, x=0;
+ 
+   Element *elem = &state->element;
+   Object *obj = &elem->object;
+@@ -274,13 +286,24 @@
+   if (state->state_type==STATE_NORMAL) { 
+       w = state->text->max_width + 2*STATE_MARGIN_X;
+       h = state->text->height*state->text->numlines +2*STATE_MARGIN_Y;
+-      if (w < STATE_WIDTH)
+-	  w = STATE_WIDTH;
++     
++      x = (state->show_internals) ? 
++          state->internals->max_width + 2*STATE_MARGIN_X:
++          STATE_WIDTH;
++     
++      if (w < x)
++	  w = x;
+       p.x = elem->corner.x + w/2.0;
+-      p.y = elem->corner.y + STATE_MARGIN_Y + state->text->ascent;
++      p.y = elem->corner.y + state->text->ascent +
++       ((state->show_internals) ? STATE_MARGIN_Y/2.0: STATE_MARGIN_Y);     
++      
+       text_set_position(state->text, &p);
+-  } else {
+-      w = h = (state->state_type==STATE_END) ? STATE_ENDRATIO: STATE_RATIO;
++      if (state->show_internals) {
++	 p.x = elem->corner.x + STATE_MARGIN_X;
++	 p.y += STATE_MARGIN_Y + state->internals->height;
++         h += state->internals->height*state->internals->numlines;
++	 text_set_position(state->internals, &p);
++      }     
+   }
+ 
+   elem->width = w;
+@@ -339,11 +362,14 @@
+   p.y += STATE_HEIGHT/2.0;
+   
+   state->text = new_text("", font, 0.8, &p, &color_black, ALIGN_CENTER);
+-  text_get_attributes(state->text,&state->attrs);
++  text_get_attributes(state->text,&state->attrs);   
++  state->internals = new_text("", font, 0.8, &p, &color_black, ALIGN_LEFT);
+ 
+   dia_font_unref(font);
+   
+   state->state_type = STATE_NORMAL;
++  state->show_internals = 0;
++   
+   element_init(elem, 8, 8);
+   
+   for (i=0;i<8;i++) {
+@@ -367,7 +393,7 @@
+ state_destroy(State *state)
+ {
+   text_destroy(state->text);
+-
++  text_destroy(state->internals);
+   element_destroy(&state->element);
+ }
+ 
