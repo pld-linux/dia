@@ -6,8 +6,6 @@ Release:	3
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
-Group(de):	X11/Applikationen/Grafik
-Group(pl):	X11/Aplikacje/Grafika
 Vendor:		James Henstridge <james@daa.com.au>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar.gz
 Patch0:		%{name}-automake.patch
