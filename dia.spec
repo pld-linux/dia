@@ -2,7 +2,7 @@ Summary:	Dia - a gtk+ based diagram creation program
 Summary(pl):	Dia - program do tworzenie diagramów
 Name:		dia
 Version:	0.86
-Release:	4
+Release:	5
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -52,8 +52,9 @@ formacie oraz eksportowaæ je do postscriptu.
 %patch2 -p1
 
 %build
+aclocal
 autoconf
-automake
+automake -a -c
 gettextize --copy --force
 %configure \
 	--enable-gnome \
