@@ -1,3 +1,4 @@
+%define	snap	20030824.0723
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
 Summary(pl):	Dia - program do tworzenia diagramСw
@@ -7,17 +8,18 @@ Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩Ысзgtk+╣даВЁлм╪ЁлпР
 Name:		dia
 Version:	0.91
-Release:	2
+Release:	3.%{snap}.1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
 # this for final releases
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	283517483601e81749db81a849a3bc91
+#Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}.tar.bz2
 # this only for snapshots
-#Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
+Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
+# Source0-md5:	61873a739cbb559c56ea6de2fb2ba898
 Patch0:		dia-state.patch
+Patch1:		dia-am.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -75,10 +77,17 @@ PostScript(TM).
 а також експортувати ╖х в PostScript(TM).
 
 %prep
-%setup -q
+#%setup -q
+%setup -q -n %{name}-cvs-snapshot
 %patch0 -p1
+%patch1 -p1
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__autoheader}
+%{__autoconf}
+%{__automake}
 %configure \
 	--enable-gnome
 %{__make}
