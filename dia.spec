@@ -8,14 +8,17 @@ Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
 Vendor:		James Henstridge <james@daa.com.au>
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar.gz
+Patch0:		dia-automake.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	gettext-devel
 BuildRequires:	gtk+-devel >= 1.2.0
+BuildRequires:	imlib-devel
 BuildRequires:	libxml-devel
 BuildRequires:	zlib-devel
-BuildRequires:	imlib-devel
-BuildRequires:	gettext-devel
 Requires:	gtk+ >= 1.2.0
-Requires: libxml >= 1.8.7
+Requires:	libxml >= 1.8.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -38,8 +41,11 @@ formacie oraz eksportowaæ je do postscriptu.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
+autoconf
+automake
 gettextize --copy --force
 LDFLAGS="-s"; export LDFLAGS
 %configure
@@ -56,9 +62,9 @@ strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/dia/lib*.so
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/*
 
-%find_lang %{name}
-
 gzip -9nf AUTHORS NEWS README TODO
+
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
