@@ -17,6 +17,7 @@ Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
 # this for final releases
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	283517483601e81749db81a849a3bc91
 # this only for snapshots
 #Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %snap | sed 's/\./-/').tar.gz
 Patch0:		dia-state.patch
