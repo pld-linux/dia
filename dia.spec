@@ -10,12 +10,12 @@ Vendor:		Alexander Larsson <alla@lysator.liu.se>
 Source0:	http://www.lysator.liu.se/~alla/dia/files/%{name}-%{version}.tar.gz
 Source1:	dia.wmconfig
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
-BuildPrereq:	gtk+-devel >= 1.2.0
-BuildPrereq:	XFree86-devel
-BuildPrereq:	libxml-devel
-BuildPrereq:	zlib-devel
-BuildPrereq:	imlib-devel
-BuildPrereq:	gettext
+BuildRequires:	gtk+-devel >= 1.2.0
+BuildRequires:	XFree86-devel
+BuildRequires:	libxml-devel
+BuildRequires:	zlib-devel
+BuildRequires:	imlib-devel
+BuildRequires:	gettext
 Requires:	gtk+ >= 1.2.0
 BuildRoot:	/tmp/%{name}-%{version}-root
 
