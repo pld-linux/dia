@@ -86,7 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/dia/lib*.so
 %attr(755,root,root) %{_libdir}/dia/lib*.la
 %{_datadir}/dia
-%{_datadir}/pixmaps/*
+%{_pixmapsdir}/*
 %{_datadir}/mime-info/*
 %{_datadir}/oaf/*
 %{_mandir}/man1/*
