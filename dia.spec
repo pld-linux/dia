@@ -10,14 +10,14 @@ Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩Ысзgtk+╣даВЁлм╪ЁлпР
 Name:		dia
-Version:	0.92.1
+Version:	0.92.2
 Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/0.92/%{name}-%{version}.tar.bz2
-# Source0-md5:	f38639293fe989b6b45b079d9f2d7302
+# Source0-md5:	2c14d023bd905e65368ee3df3248dc2a
 ## this only for snapshots
 ##Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %{snap} | tr . -).tar.gz
 ## this for pre releases
