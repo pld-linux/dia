@@ -1,6 +1,6 @@
 
 #%%define	snap	20030908.0723
-%define	pre		pre2
+%define	pre		pre3
 
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
@@ -17,7 +17,7 @@ License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}-%{pre}.tar.gz
-# Source0-md5:	9428a3f253c4f6714662b8b9e45509ea
+# Source0-md5:	3fda9eefa7b521b6cd8fcc1e36d02189
 ## this only for snapshots
 ##Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %{snap} | tr . -).tar.gz
 # this for pre releases
