@@ -42,7 +42,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644, root, root, 755)
 %doc AUTHORS NEWS README TODO
 %attr(755, root, root) /usr/X11R6/bin/dia
-%attr(755, root, root) /usr/X11R6/lib*.so.*.*
+%dir /usr/X11R6/lib/dia
+%attr(755, root, root) /usr/X11R6/lib/dia/lib*.so.*
 
 %changelog
 * Sun Aug 30 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
