@@ -10,7 +10,8 @@ Vendor:		Alexander Larsson <alla@lysator.liu.se>
 Source0:	http://www.lysator.liu.se/~alla/dia/files/%{name}-%{version}.tar.gz
 Source1:	dia.wmconfig
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
-Requires:	gtk+ = 1.2.1
+BuildPrereq:	gtk+-devel >= 1.1.13
+%requires_pkg	gtk+
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
