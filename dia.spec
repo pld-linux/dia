@@ -2,13 +2,13 @@
 #%%define	snap	20030908.0723
 %define		pre		pre3
 
-Summary:	Dia - a gtk+ based diagram creation program
+Summary:	Dia - a GTK+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
 Summary(pl):	Dia - program do tworzenia diagramСw
 Summary(pt_BR):	Programa para desenho de diagramas
 Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
-Summary(zh_CN):	╩Ысзgtk+╣даВЁлм╪ЁлпР
+Summary(zh_CN):	╩ЫсзGTK+╣даВЁлм╪ЁлпР
 Name:		dia
 Version:	0.94
 Release:	1
