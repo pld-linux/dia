@@ -49,9 +49,11 @@ formacie oraz eksportowaæ je do postscriptu.
 %patch0 -p1
 
 %build
-automake -a -c
+rm -f missing
+aclocal
 autoconf
 autoheader
+automake -a -c
 %configure \
 	--enable-gnome \
 	--enable-gnome-print \
