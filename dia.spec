@@ -1,5 +1,5 @@
 
-%define pre pre2
+%define pre pre3
 
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
