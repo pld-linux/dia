@@ -15,7 +15,7 @@ BuildRequires:	XFree86-devel
 BuildRequires:	libxml-devel
 BuildRequires:	zlib-devel
 BuildRequires:	imlib-devel
-BuildRequires:	gettext
+BuildRequires:	gettext-devel
 Requires:	gtk+ >= 1.2.0
 BuildRoot:	/tmp/%{name}-%{version}-root
 
