@@ -37,7 +37,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.3.9
 BuildRequires:	libxslt-devel
 BuildRequires:	popt-devel
-BuildRequires:	python-devel >= 2.3
+BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python-pygtk-devel
 Requires:	python-modules >= 2.3
 Requires:	python-pygtk-gtk
