@@ -1,3 +1,4 @@
+
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
 Summary(pl):	Dia - program do tworzenia diagramСw
@@ -6,7 +7,7 @@ Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
 Name:		dia
 Version:	0.90
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -19,14 +20,12 @@ Patch0:		%{name}-automake.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	bonobo-devel
 BuildRequires:	freetype-devel
 BuildRequires:	gdk-pixbuf-devel
 BuildRequires:	gettext-devel
-BuildRequires:	gnome-libs-devel
 BuildRequires:	intltool
-BuildRequires:	libxml-devel
 BuildRequires:	libunicode-devel
+BuildRequires:	libxml-devel
 BuildRequires:	popt-devel
 Requires:	libxml >= 1.8.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -87,16 +86,8 @@ PostScript(TM).
 %patch0 -p1
 
 %build
-rm -f missing
-aclocal
-%{__autoconf}
-autoheader
-%{__automake}
-%configure \
-	--enable-gnome \
-	--enable-gnome-print \
-	--enable-bonobo \
-	--enable-freetype
+./autogen.sh
+%configure
 %{__make}
 
 %install
@@ -115,15 +106,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
-#%{_sysconfdir}/CORBA/servers/*
 
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so
+%attr(755,root,root) %{_libdir}/dia/lib*.la
 
 %{_mandir}/man1/*
 
 %{_applnkdir}/Graphics/dia.desktop
 %{_datadir}/dia
 %{_datadir}/mime-info/*
-%{_datadir}/oaf/GNOME_Dia.oaf
 %{_pixmapsdir}/*
+#%{_sysconfdir}/CORBA/servers/*
