@@ -1,7 +1,8 @@
 Summary:     Dia - a gtk+ based diagram creation program
+Summary(pl): Dia - bazuj±cy na gtk+ program do tworzenie diagramów
 Name:        dia
 Version:     0.20
-Release:     1
+Release:     2
 Copyright:   GPL
 Group:       X11/Applications/Graphics
 Vendor:      Alexander Larsson <alla@lysator.liu.se>
@@ -17,6 +18,13 @@ can be used to draw different kind of diagrams. In this first version there
 is support for UML static structure diagrams (class diagrams) and Network
 diagrams. It can currently load and save diagrams to a custom fileformat and
 export to postscript.
+
+%description -l pl
+Dia jest programem zaprojektowanym tak by byæ podobnym do programu 'Visio'
+znanego z Windows. Dia mo¿e byæ u¿ywany do rysowania ró¿nego rodzaju diagramów.
+W tej wersji znajduje siê wsparcie dla diagramów o statycznej strukturze UML
+(diagramy klasowe) i dla diagramów sieciowych. Aktualnie mo¿e on ³adowaæ
+i zapisywaæ diagramy we w³asnym formacie oraz eksportowaæ je do postscriptu.
 
 %prep
 %setup -q
@@ -47,6 +55,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755, root, root) /usr/X11R6/lib/dia/lib*.la
 
 %changelog
+* Sat Sep 26 1998 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
+  [0.20-2]
+- added pl translation.
+
 * Sun Aug 30 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.20-1]
 - first release in rpm package.
