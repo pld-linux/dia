@@ -19,6 +19,8 @@ BuildPrereq:	gettext
 Requires:	gtk+ >= 1.2.0
 BuildRoot:	/tmp/%{name}-%{version}-root
 
+%define _prefix /usr/X11R6
+
 %description
 Dia is a program designed to be much like the Windows program 'Visio'. It
 can be used to draw different kind of diagrams. In this first version there
@@ -39,7 +41,7 @@ i zapisywaæ diagramy we w³asnym formacie oraz eksportowaæ je do postscriptu.
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target} \
-	--prefix=/usr/X11R6
+	--prefix=%{_prefix}
 make
 
 %install
@@ -50,7 +52,7 @@ make install DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/%{name}
 
-strip $RPM_BUILD_ROOT/usr/X11R6/{bin/*,lib/dia/lib*.so.*.*}
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/dia/lib*.so.*.*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -58,12 +60,16 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README TODO
-%attr(755,root,root) /usr/X11R6/bin/dia
-%dir /usr/X11R6/lib/dia
-%attr(755,root,root) /usr/X11R6/lib/dia/lib*.so*
-%attr(755,root,root) /usr/X11R6/lib/dia/lib*.la
+%attr(755,root,root) %{_bindir}/dia
+%dir %{_libdir}/dia
+%attr(755,root,root) %{_libdir}/dia/lib*.so*
+%attr(755,root,root) %{_libdir}/dia/lib*.la
 
 %changelog
+* Sat May 29 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.41-3]
+- added more rpm macros.
+
 * Wed Apr 21 1999 Piotr Czerwiñski <pius@pld.org.pl>
   [0.41-2]
 - recompiled on rpm 3.
