@@ -8,7 +8,7 @@ Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
 Vendor:		Alexander Larsson <alla@lysator.liu.se>
 Source0:	http://www.lysator.liu.se/~alla/dia/files/%{name}-%{version}.tar.gz
-Source1:	dia.wmconfig
+Source1:	dia.desktop
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	gtk+-devel >= 1.2.0
 BuildRequires:	XFree86-devel
@@ -46,11 +46,11 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/X11/wmconfig
+install -d $RPM_BUILD_ROOT/etc/X11/applnk/Graphics
 
 make install DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/%{name}
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/applnk/Graphics
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/dia/lib*.so.*.*
 
@@ -64,6 +64,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc *.gz
+/etc/X11/applnk/Graphics/dia.dektop
 %attr(755,root,root) %{_bindir}/dia
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so*
