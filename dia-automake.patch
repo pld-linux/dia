@@ -1,16 +1,27 @@
---- dia-0.86/app/Makefile.am	Tue Aug  8 07:03:05 2000
-+++ dia-0.86.new/app/Makefile.am	Tue Aug  8 07:03:36 2000
-@@ -154,7 +154,7 @@
- 	$(APP_LIBS) $(XML_LIBS) $(BONOBO_LIBS) $(GDK_IMLIB_LIBS) \
- 	$(LIBART_LIBS) $(PNG_LIBS) $(GDK_PIXBUF_LIBS) $(INTLLIBS)
+diff -Nur dia-0.88.1.orig/app/Makefile.am dia-0.88.1/app/Makefile.am
+--- dia-0.88.1.orig/app/Makefile.am	Wed May  9 06:05:30 2001
++++ dia-0.88.1/app/Makefile.am	Fri Oct 12 15:48:33 2001
+@@ -159,7 +159,7 @@
+ 	$(LIBART_LIBS) $(PNG_LIBS) $(GDK_PIXBUF_LIBS) $(INTLLIBS) \
+ 	$(UNICODE_LIBS)
  
 -LDFLAGS = -export-dynamic
 +dia_embedd_LDFLAGS = -export-dynamic
  
  EXTRA_DIST = \
- 	dia.gnorba \
---- dia-0.86/configure.in	Wed Aug  2 16:55:21 2000
-+++ dia-0.86.new/configure.in	Tue Aug  8 07:06:00 2000
+ 	GNOME_Dia.oaf \
+@@ -192,7 +192,7 @@
+ 	pixmaps/magnify-minus-data.xbm \
+ 	pixmaps/magnify-minus-mask.xbm
+ 
+-run_dia.sh: Makefile.am
++run_dia.sh$(EXEEXT): Makefile.am
+ 	echo "#!$(SHELL) " > run_dia.sh
+ 	echo "export DIA_LIB_PATH DIA_SHAPE_PATH DIA_INT_SHAPE_PATH DIA_SHEET_PATH" >> run_dia.sh
+ 	echo DIA_LIB_PATH=`pwd`/../objects/standard/.libs >> run_dia.sh
+diff -Nur dia-0.88.1.orig/configure.in dia-0.88.1/configure.in
+--- dia-0.88.1.orig/configure.in	Sat May 19 06:49:28 2001
++++ dia-0.88.1/configure.in	Fri Oct 12 15:45:24 2001
 @@ -11,7 +11,7 @@
  
  dnl Initialize libtool

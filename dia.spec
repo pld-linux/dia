@@ -1,8 +1,8 @@
 Summary:	Dia - a gtk+ based diagram creation program
-Summary(pl):	Dia - program do tworzenie diagramów
+Summary(pl):	Dia - program do tworzenia diagramów
 Name:		dia
 Version:	0.88.1
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -54,6 +54,7 @@ aclocal
 autoconf
 autoheader
 automake -a -c
+CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
 %configure \
 	--enable-gnome \
 	--enable-gnome-print \
