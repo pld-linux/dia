@@ -109,7 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so.*
 %attr(755,root,root) %{_libdir}/dia/lib*.so
-%attr(755,root,root) %{_libdir}/dia/lib*.la
+%{_libdir}/dia/lib*.la
 
 %{_mandir}/man1/*
 
