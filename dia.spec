@@ -1,5 +1,5 @@
 
-%define snap 20021022.0723
+%define snap 20030123.0823
 
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
