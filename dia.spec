@@ -1,5 +1,5 @@
 
-%define snap 20030123.0823
+%define snap 20030130.0823
 
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
@@ -27,8 +27,6 @@ BuildRequires:	intltool
 BuildRequires:	libgnomeui-devel
 BuildRequires:	libxslt-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_sysconfdir	/etc/X11/GNOME
 
 %description
 Dia is a program designed to be much like the Windows program 'Visio'.
@@ -84,7 +82,7 @@ PostScript(TM).
 %build
 ./autogen.sh
 %configure \
-	--enable-gnome
+	--disable-gnome
 %{__make}
 
 %install
