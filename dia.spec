@@ -1,5 +1,5 @@
 
-%define snap 20021002.0723
+%define snap 20021016.0723
 
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
@@ -107,6 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 
 %dir %{_libdir}/dia
+%attr(755,root,root) %{_libdir}/dia/lib*.so.*
 %attr(755,root,root) %{_libdir}/dia/lib*.so
 %attr(755,root,root) %{_libdir}/dia/lib*.la
 
