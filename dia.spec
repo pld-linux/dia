@@ -1,4 +1,4 @@
-%define	snap	20030902.0723
+%define	snap	20030908.0723
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
 Summary(pl):	Dia - program do tworzenia diagramów
@@ -17,7 +17,7 @@ Vendor:		James Henstridge <james@daa.com.au>
 #Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}.tar.bz2
 # this only for snapshots
 Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %{snap} | tr . -).tar.gz
-# Source0-md5:	e373090fa4cf8ea2da3b57fe434ed11d
+# Source0-md5:	5035bb6afefd2dbf6afb6b9cdc1f8bd3
 Patch0:		dia-state.patch
 Patch1:		dia-am.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
