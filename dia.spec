@@ -88,11 +88,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	Applicationsdir=%{_datadir}/applications
+	Applicationsdir=%{_desktopdir}
 
 #Fixme!!!!!!
 #Dirty hack for desktop file
-echo "Categories=Application;Office;" >> $RPM_BUILD_ROOT%{_datadir}/applications/dia.desktop
+echo "Categories=Application;Office;" >> $RPM_BUILD_ROOT%{_desktopdir}/dia.desktop
 
 # for libxslt plugin; DIA_PLUGIN_PATH is required by libxslt plugin, so set
 # it before running dia app
@@ -123,7 +123,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_mandir}/man1/*
 
-%{_datadir}/applications/dia.desktop
 %{_datadir}/dia
 %{_datadir}/mime-info/*
+%{_desktopdir}/dia.desktop
 %{_pixmapsdir}/*
