@@ -1,6 +1,3 @@
-
-%define pre pre3
-
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
 Summary(pl):	Dia - program do tworzenia diagramów
@@ -79,12 +76,9 @@ PostScript(TM).
 
 %prep
 %setup -q
-#%setup -q -n %{name}-%{version}-%{pre}
 %patch0 -p1
-#%setup -q -n dia-cvs-snapshot
 
 %build
-#./autogen.sh
 %configure \
 	--enable-gnome
 %{__make}
