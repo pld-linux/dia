@@ -63,26 +63,3 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so*
 %attr(755,root,root) %{_libdir}/dia/lib*.la
-
-%changelog
-* Sat May 29 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.41-3]
-- added more rpm macros.
-
-* Wed Apr 21 1999 Piotr Czerwiñski <pius@pld.org.pl>
-  [0.41-2]
-- recompiled on rpm 3.
-
-* Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.30-1]
-- changed way passing $RPM_OPT_FLAGS,
-- updated requires (gtk+ = 1.2.0),
-- "make install" with using DESTDIR.
-
-* Sat Sep 26 1998 Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>
-  [0.20-2]
-- added pl translation.
-
-* Sun Aug 30 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.20-1]
-- first release in rpm package.
