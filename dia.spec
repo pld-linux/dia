@@ -1,14 +1,14 @@
 Summary:	Dia - a gtk+ based diagram creation program
 Summary(pl):	Dia - program do tworzenie diagramów
 Name:		dia
-Version:	0.82
+Version:	0.83
 Release:	1
 License:	GPL
 Group:		X11/Applications/Graphics
 Group(pl):	X11/Aplikacje/Grafika
 Vendor:		James Henstridge <james@daa.com.au>
-Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar.gz
-Source1:	dia.desktop
+Source:		ftp://ftp.gnome.org/pub/GNOME/stable/sources/dia/%{name}-%{version}.tar.gz
+Patch:		dia-applnkdir.patch
 URL:		http://www.lysator.liu.se/~alla/dia/dia.html
 BuildRequires:	gtk+-devel >= 1.2.0
 BuildRequires:	XFree86-devel
@@ -40,8 +40,10 @@ je do postscriptu.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
+automake
 gettextize --copy --force
 LDFLAGS="-s"; export LDFLAGS
 %configure
