@@ -8,7 +8,7 @@ Vendor:      Alexander Larsson <alla@lysator.liu.se>
 Source0:     http://www.lysator.liu.se/~alla/dia/%{name}-%{version}.tar.gz
 Source1:     %{name}.wmconfig
 URL:         http://www.lysator.liu.se/~alla/dia/dia.html
-Requires:    gtk+ >= 1.2.1
+Requires:    gtk+ >= 1.1.1
 BuildRoot:   /tmp/%{name}-%{version}-root
 
 %description
@@ -33,7 +33,7 @@ make install prefix=$RPM_BUILD_ROOT/usr/X11R6
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/%{name}
 
-strip $RPM_BUILD_ROOT/usr/X11R6/{bin/*,lib/lib*.so.*.*}
+strip $RPM_BUILD_ROOT/usr/X11R6/{bin/*,lib/dia/lib*.so.*.*}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -43,7 +43,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS NEWS README TODO
 %attr(755, root, root) /usr/X11R6/bin/dia
 %dir /usr/X11R6/lib/dia
-%attr(755, root, root) /usr/X11R6/lib/dia/lib*.so.*
+%attr(755, root, root) /usr/X11R6/lib/dia/lib*.so*
+%attr(755, root, root) /usr/X11R6/lib/dia/lib*.la
 
 %changelog
 * Sun Aug 30 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
