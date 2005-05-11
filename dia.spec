@@ -11,7 +11,7 @@ Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩ЫсзGTK+╣даВЁлм╪ЁлпР
 Name:		dia
 Version:	0.94
-Release:	5
+Release:	6
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -25,6 +25,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/0.94/%{name}-%{version}.
 Patch2:		%{name}-locale-names.patch
 Patch3:		%{name}-python.patch
 Patch4:		%{name}-desktop.patch
+Patch5:		%{name}-gcc4.patch
 URL:		http://www.gnome.org/projects/dia/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -98,6 +99,7 @@ PostScript(TM).
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 mv po/{no,nb}.po
 

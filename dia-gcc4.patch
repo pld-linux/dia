@@ -1,0 +1,25 @@
+--- dia-0.94/objects/custom/shape_info.c.orig	2004-08-16 09:56:15.000000000 +0200
++++ dia-0.94/objects/custom/shape_info.c	2005-05-11 19:55:34.000000000 +0200
+@@ -116,7 +116,7 @@
+ /* routine to chomp off the start of the string */
+ #define path_chomp(path) while (path[0]!='\0'&&strchr(" \t\n\r,", path[0])) path++
+ 
+-static void
++void
+ parse_path(ShapeInfo *info, const char *path_str, DiaSvgGraphicStyle *s)
+ {
+   enum {
+--- dia-0.94/plug-ins/python/pydia-object.h.orig	2004-08-16 09:56:20.000000000 +0200
++++ dia-0.94/plug-ins/python/pydia-object.h	2005-05-11 20:11:57.000000000 +0200
+@@ -20,10 +20,9 @@
+ #ifndef PYDIA_OBJECT_H
+ #define PYDIA_OBJECT_H
+ 
++#include <object.h>
+ #include <Python.h>
+ 
+-#include "object.h"
+-
+ typedef struct {
+     PyObject_HEAD
+     DiaObject *object;
