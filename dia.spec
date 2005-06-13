@@ -11,7 +11,7 @@ Summary(uk):	ðÒÏÇÒÁÍÁ ÄÌÑ ÍÁÌÀ×ÁÎÎÑ Ä¦ÁÇÒÁÍ
 Summary(zh_CN):	»ùÓÚGTK+µÄÁ÷³ÌÍ¼³ÌÐò
 Name:		dia
 Version:	0.94
-Release:	6
+Release:	7
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -130,12 +130,10 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
 rm -rf $RPM_BUILD_ROOT
 
 %post
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
+%update_desktop_database_post
 
 %postun
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
+%update_desktop_database_postun
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
