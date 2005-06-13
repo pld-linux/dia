@@ -122,6 +122,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	Applicationsdir=%{_desktopdir}
 
+rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
+
 %find_lang %{name} --with-gnome
 
 %clean
@@ -147,6 +149,5 @@ umask 022
 %{_mandir}/man1/*
 
 %{_datadir}/dia
-%{_datadir}/mime-info/*
 %{_desktopdir}/dia.desktop
 %{_pixmapsdir}/*
