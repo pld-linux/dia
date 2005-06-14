@@ -11,7 +11,7 @@ Summary(uk):	ðÒÏÇÒÁÍÁ ÄÌÑ ÍÁÌÀ×ÁÎÎÑ Ä¦ÁÇÒÁÍ
 Summary(zh_CN):	»ùÓÚGTK+µÄÁ÷³ÌÍ¼³ÌÐò
 Name:		dia
 Version:	0.94
-Release:	7
+Release:	8
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
@@ -41,6 +41,7 @@ BuildRequires:	libxslt-devel
 BuildRequires:	popt-devel
 BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python-pygtk-devel
+Requires(post,postun):	desktop-file-utils
 Requires:	python-modules >= 2.3
 Requires:	python-pygtk-gtk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
