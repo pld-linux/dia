@@ -1,3 +1,5 @@
+# TODO
+# - CVE-2006-1550   http://security.gentoo.org/glsa/glsa-200604-14.xml
 
 #%%define	snap	20030908.0723
 %define		pre		pre3
@@ -15,13 +17,12 @@ Release:	8
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
-Vendor:		James Henstridge <james@daa.com.au>
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/0.94/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/0.94/%{name}-%{version}.tar.bz2
 # Source0-md5:	63584224912dab49fed8d2cf87ea2d85
 ## this only for snapshots
 ##Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %{snap} | tr . -).tar.gz
-#Patch0:		dia-state.patch
-#Patch1:		%{name}-home_etc.patch
+#Patch0:	%{name}-state.patch
+#Patch1:	%{name}-home_etc.patch
 Patch2:		%{name}-locale-names.patch
 Patch3:		%{name}-python.patch
 Patch4:		%{name}-desktop.patch
