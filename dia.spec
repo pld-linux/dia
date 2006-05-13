@@ -1,6 +1,6 @@
 
 #%%define	snap	20030908.0723
-%define		pre		pre3
+#%define	pre		pre3
 
 Summary:	Dia - a GTK+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
@@ -10,37 +10,40 @@ Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩ЫсзGTK+╣даВЁлм╪ЁлпР
 Name:		dia
-Version:	0.94
-Release:	8
+Version:	0.95
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/0.94/%{name}-%{version}.tar.bz2
-# Source0-md5:	63584224912dab49fed8d2cf87ea2d85
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	d319921a91d4600df3578a4a64416393
 ## this only for snapshots
 ##Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %{snap} | tr . -).tar.gz
 #Patch0:		dia-state.patch
 #Patch1:		%{name}-home_etc.patch
-Patch2:		%{name}-locale-names.patch
-Patch3:		%{name}-python.patch
-Patch4:		%{name}-desktop.patch
-Patch5:		%{name}-gcc4.patch
+Patch2:		%{name}-python.patch
+Patch3:		%{name}-desktop.patch
 URL:		http://www.gnome.org/projects/dia/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	docbook-utils
 BuildRequires:	gettext-devel
 BuildRequires:	howl-devel >= 0.9.10
 BuildRequires:	intltool >= 0.21
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libgnomeui-devel >= 2.0.0
 BuildRequires:	libpng-devel
+BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.3.9
 BuildRequires:	libxslt-devel
+BuildRequires:	libxslt-progs
 BuildRequires:	popt-devel
-BuildRequires:	python-devel >= 1:2.3
+BuildRequires:	python-devel >= 2.3
 BuildRequires:	python-pygtk-devel
+BuildRequires:	python-PyXML
+BuildRequires:	rpm-pythonprov
 Requires(post,postun):	desktop-file-utils
 Requires:	python-modules >= 2.3
 Requires:	python-pygtk-gtk
@@ -99,10 +102,6 @@ PostScript(TM).
 #%patch1 -p1 - obsoleted?
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
-
-mv po/{no,nb}.po
 
 %build
 %{__libtoolize}
