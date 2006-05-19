@@ -1,7 +1,3 @@
-
-#%%define	snap	20030908.0723
-#%define	pre		pre3
-
 Summary:	Dia - a GTK+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
 Summary(pl):	Dia - program do tworzenia diagramów
@@ -16,36 +12,33 @@ Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Vendor:		James Henstridge <james@daa.com.au>
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/%{version}/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/%{version}/%{name}-%{version}.tar.bz2
 # Source0-md5:	d319921a91d4600df3578a4a64416393
-## this only for snapshots
-##Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %{snap} | tr . -).tar.gz
-#Patch0:		dia-state.patch
-#Patch1:		%{name}-home_etc.patch
-Patch2:		%{name}-python.patch
-Patch3:		%{name}-desktop.patch
+Patch0:		%{name}-python.patch
+Patch1:		%{name}-desktop.patch
 URL:		http://www.gnome.org/projects/dia/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	docbook-utils
 BuildRequires:	gettext-devel
-BuildRequires:	howl-devel >= 0.9.10
+BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	intltool >= 0.21
-BuildRequires:	libart_lgpl-devel
+BuildRequires:	libart_lgpl-devel >= 2.0
 BuildRequires:	libgnomeui-devel >= 2.0.0
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool
+BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.3.9
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
+BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
-BuildRequires:	python-devel >= 2.3
+BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python-pygtk-devel
 BuildRequires:	python-PyXML
 BuildRequires:	rpm-pythonprov
 Requires(post,postun):	desktop-file-utils
-Requires:	python-modules >= 2.3
+Requires:	python-modules >= 1:2.3
 Requires:	python-pygtk-gtk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -98,10 +91,8 @@ PostScript(TM).
 
 %prep
 %setup -q
-#%patch0 -p1
-#%patch1 -p1 - obsoleted?
-%patch2 -p1
-%patch3 -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
