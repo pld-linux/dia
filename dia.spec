@@ -1,7 +1,3 @@
-
-#%%define	snap	20030908.0723
-%define		pre		pre3
-
 Summary:	Dia - a GTK+ based diagram creation program
 Summary(es):	Programa para dibujo de diagramas
 Summary(pl):	Dia - program do tworzenia diagramСw
@@ -10,38 +6,41 @@ Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩ЫсзGTK+╣даВЁлм╪ЁлпР
 Name:		dia
-Version:	0.94
-Release:	6
+%define		_ver	0.95
+%define		_extraver	1
+Version:	%{_ver}.%{_extraver}
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
-Vendor:		James Henstridge <james@daa.com.au>
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/0.94/%{name}-%{version}.tar.bz2
-# Source0-md5:	63584224912dab49fed8d2cf87ea2d85
-## this only for snapshots
-##Source0:	http://www.crans.org/~chepelov/dia/snapshots/%{name}-CVS-%(echo %{snap} | tr . -).tar.gz
-#Patch0:		dia-state.patch
-#Patch1:		%{name}-home_etc.patch
-Patch2:		%{name}-locale-names.patch
-Patch3:		%{name}-python.patch
-Patch4:		%{name}-desktop.patch
-Patch5:		%{name}-gcc4.patch
+Source0:	ftp://ftp.gnome.org/pub/gnome/sources/dia/0.95/%{name}-%{_ver}-%{_extraver}.tar.bz2
+# Source0-md5:	bd4d5bd71b60b9ce11610256534e4d82
+Patch0:		%{name}-python.patch
+Patch1:		%{name}-desktop.patch
+Patch2:		%{name}-gcc4.patch
 URL:		http://www.gnome.org/projects/dia/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
+BuildRequires:	docbook-utils
 BuildRequires:	gettext-devel
-BuildRequires:	howl-devel >= 0.9.10
+BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	intltool >= 0.21
-BuildRequires:	libart_lgpl-devel
+BuildRequires:	libart_lgpl-devel >= 2.0
 BuildRequires:	libgnomeui-devel >= 2.0.0
 BuildRequires:	libpng-devel
-BuildRequires:	libtool
+BuildRequires:	libstdc++-devel
+BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.3.9
 BuildRequires:	libxslt-devel
+BuildRequires:	libxslt-progs
+BuildRequires:	pkgconfig
 BuildRequires:	popt-devel
+BuildRequires:	python-PyXML
 BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python-pygtk-devel
-Requires:	python-modules >= 2.3
+BuildRequires:	rpm-pythonprov
+Requires(post,postun):	desktop-file-utils
+Requires:	python-modules >= 1:2.3
 Requires:	python-pygtk-gtk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -93,15 +92,10 @@ PostScript(TM).
 а також експортувати ╖х в PostScript(TM).
 
 %prep
-%setup -q
-#%patch0 -p1
-#%patch1 -p1 - obsoleted?
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-
-mv po/{no,nb}.po
+%setup -q -n %{name}-%{_ver}-%{_extraver}
+%patch0 -p1
+%patch1 -p1
+#%patch2 -p1 -- needs check
 
 %build
 %{__libtoolize}
@@ -122,18 +116,18 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	Applicationsdir=%{_desktopdir}
 
+rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
+
 %find_lang %{name} --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
+%update_desktop_database_post
 
 %postun
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
+%update_desktop_database_postun
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -147,6 +141,5 @@ umask 022
 %{_mandir}/man1/*
 
 %{_datadir}/dia
-%{_datadir}/mime-info/*
 %{_desktopdir}/dia.desktop
 %{_pixmapsdir}/*
