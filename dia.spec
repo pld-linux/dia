@@ -13,7 +13,7 @@ Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
-Source0:	ftp://ftp.gnome.org/pub/gnome/sources/dia/0.95/%{name}-%{_ver}-%{_extraver}.tar.bz2
+Source0:	ftp://ftp.gnome.org/pub/gnome/sources/dia/%{_ver}/%{name}-%{_ver}-%{_extraver}.tar.bz2
 # Source0-md5:	bd4d5bd71b60b9ce11610256534e4d82
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-desktop.patch
