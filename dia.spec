@@ -9,7 +9,7 @@ Name:		dia
 %define		_ver	0.95
 %define		_extraver	1
 Version:	%{_ver}.%{_extraver}
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
