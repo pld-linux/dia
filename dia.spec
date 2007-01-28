@@ -138,6 +138,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/dia/lib*.so
 %{_libdir}/dia/lib*.la
 %{_docdir}/dia/*.xml
+%dir %{_docdir}/dia
 %dir %{_docdir}/dia/graphics
 %{_docdir}/dia/graphics/*.png
 
