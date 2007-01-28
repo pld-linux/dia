@@ -6,15 +6,15 @@ Summary(ru):	Программа для рисования диаграмм
 Summary(uk):	Програма для малювання д╕аграм
 Summary(zh_CN):	╩ЫсзGTK+╣даВЁлм╪ЁлпР
 Name:		dia
-%define		_ver	0.95
-%define		_extraver	1
+%define		_ver	0.96
+%define		_extraver	pre3
 Version:	%{_ver}.%{_extraver}
-Release:	2
+Release:	0.5
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
-Source0:	ftp://ftp.gnome.org/pub/gnome/sources/dia/0.95/%{name}-%{_ver}-%{_extraver}.tar.bz2
-# Source0-md5:	bd4d5bd71b60b9ce11610256534e4d82
+Source0:	ftp://ftp.gnome.org/pub/gnome/sources/dia/%{_ver}/%{name}-%{_ver}-%{_extraver}.tar.bz2
+# Source0-md5:	abcb045a4f0c88d9d91ca2dbcdc7be37
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-gcc4.patch
@@ -94,7 +94,7 @@ PostScript(TM).
 %prep
 %setup -q -n %{name}-%{_ver}-%{_extraver}
 %patch0 -p1
-%patch1 -p1
+%patch1 -p0
 #%patch2 -p1 -- needs check
 
 %build
@@ -114,7 +114,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	Applicationsdir=%{_desktopdir}
+	desktopdir=%{_desktopdir}
 
 rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
 
@@ -137,6 +137,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so
 %{_libdir}/dia/lib*.la
+%{_docdir}/dia/*.xml
+%dir %{_docdir}/dia/graphics
+%{_docdir}/dia/graphics/*.png
 
 %{_mandir}/man1/*
 
