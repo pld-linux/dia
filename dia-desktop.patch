@@ -1,7 +1,6 @@
-diff -urN dia-0.94.orig/dia.desktop.in dia-0.94/dia.desktop.in
---- dia-0.94.orig/dia.desktop.in	2004-11-17 00:00:53.000000000 +0100
-+++ dia-0.94/dia.desktop.in	2004-11-17 00:02:03.000000000 +0100
-@@ -6,6 +6,6 @@
+--- dia.desktop.in.in.orig	2007-01-06 23:39:36.000000000 +0100
++++ dia.desktop.in.in	2007-01-28 20:59:45.654855771 +0100
+@@ -6,7 +6,7 @@
  Exec=dia
  Icon=dia_gnome_icon.png
  Terminal=false
@@ -9,3 +8,4 @@ diff -urN dia-0.94.orig/dia.desktop.in dia-0.94/dia.desktop.in
 +Categories=GTK;GNOME;Graphics;
  StartupNotify=true
  MimeType=application/x-dia-diagram;
+ X-GNOME-Bugzilla-Bugzilla=GNOME
