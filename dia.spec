@@ -1,10 +1,10 @@
 Summary:	Dia - a GTK+ based diagram creation program
-Summary(es):	Programa para dibujo de diagramas
-Summary(pl):	Dia - program do tworzenia diagramСw
-Summary(pt_BR):	Programa para desenho de diagramas
-Summary(ru):	Программа для рисования диаграмм
-Summary(uk):	Програма для малювання д╕аграм
-Summary(zh_CN):	╩ЫсзGTK+╣даВЁлм╪ЁлпР
+Summary(es.UTF-8):   Programa para dibujo de diagramas
+Summary(pl.UTF-8):   Dia - program do tworzenia diagramцЁw
+Summary(pt_BR.UTF-8):   Programa para desenho de diagramas
+Summary(ru.UTF-8):   п÷я─п╬пЁя─п╟п╪п╪п╟ п╢п╩я▐ я─п╦я│п╬п╡п╟п╫п╦я▐ п╢п╦п╟пЁя─п╟п╪п╪
+Summary(uk.UTF-8):   п÷я─п╬пЁя─п╟п╪п╟ п╢п╩я▐ п╪п╟п╩я▌п╡п╟п╫п╫я▐ п╢я√п╟пЁя─п╟п╪
+Summary(zh_CN.UTF-8):   Е÷╨Д╨▌GTK+Г └Ф╣│Г╗▀Е⌡╬Г╗▀Е╨▐
 Name:		dia
 %define		_ver	0.96
 %define		_extraver	pre3
@@ -51,45 +51,45 @@ version there is support for UML static structure diagrams (class
 diagrams) and Network diagrams. It can currently load and save
 diagrams to a custom fileformat and export to postscript.
 
-%description -l es
+%description -l es.UTF-8
 Programa proyectado para que fuera semejante al Visio. Puede usarse
 para realizar diagramas de diferentes tipos e incluye soporte para
-diagramas de estructuras UML estАticas (diagramas de clase), modelos
+diagramas de estructuras UML estц║ticas (diagramas de clase), modelos
 de entidades y relacionamiento y diagramas de red. El programa Dia usa
-un formato propio de archivo y tambiИn puede usar el formato .xml, asМ
-como tambiИn puede exportar para PostScript(TM).
+un formato propio de archivo y tambiц╘n puede usar el formato .xml, asц╜
+como tambiц╘n puede exportar para PostScript(TM).
 
-%description -l pl
-Dia jest programem zaprojektowanym tak by byФ podobnym do programu
-'Visio' znanego z Windows. Dia mo©e byФ u©ywany do rysowania rС©nego
-rodzaju diagramСw. W tej wersji znajduje siЙ wsparcie dla diagramСw o
-statycznej strukturze UML (diagramy klasowe) i dla diagramСw
-sieciowych. Aktualnie mo©e on ЁadowaФ i zapisywaФ diagramy we wЁasnym
-formacie oraz eksportowaФ je do postscriptu.
+%description -l pl.UTF-8
+Dia jest programem zaprojektowanym tak by byд┤ podobnym do programu
+'Visio' znanego z Windows. Dia moе╪e byд┤ uе╪ywany do rysowania rцЁе╪nego
+rodzaju diagramцЁw. W tej wersji znajduje siд≥ wsparcie dla diagramцЁw o
+statycznej strukturze UML (diagramy klasowe) i dla diagramцЁw
+sieciowych. Aktualnie moе╪e on е┌adowaд┤ i zapisywaд┤ diagramy we wе┌asnym
+formacie oraz eksportowaд┤ je do postscriptu.
 
-%description -l pt_BR
+%description -l pt_BR.UTF-8
 Programa projetado para ser semelhante ao Visio. Pode ser usado para
 desenhar diferentes tipos de diagramas e inclui suporte a diagramas de
-estruturas UML estАticas (diagramas de classe), modelo de entidades e
-relacionamento e diagramas de rede. O Dia usa um formato prСprio de
-arquivo e pode tambИm usar o formato .xml, bem como exportar para
+estruturas UML estц║ticas (diagramas de classe), modelo de entidades e
+relacionamento e diagramas de rede. O Dia usa um formato prцЁprio de
+arquivo e pode tambц╘m usar o formato .xml, bem como exportar para
 PostScript(TM).
 
-%description -l ru
-Программа Dia разработана как альтернатива Visio для Windows(TM). Dia
-можно использовать для рисования различных типов диаграмм, она
-включает поддержку структурных статических диаграмм UML (диаграмм
-классов), моделирование отношений объектов и сетевых диаграмм. Dia
-может загружать и сохранять диаграммы в собственном формате и в
-формате .xml а также экспортировать их в PostScript(TM).
+%description -l ru.UTF-8
+п÷я─п╬пЁя─п╟п╪п╪п╟ Dia я─п╟п╥я─п╟п╠п╬я┌п╟п╫п╟ п╨п╟п╨ п╟п╩я▄я┌п╣я─п╫п╟я┌п╦п╡п╟ Visio п╢п╩я▐ Windows(TM). Dia
+п╪п╬п╤п╫п╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п╢п╩я▐ я─п╦я│п╬п╡п╟п╫п╦я▐ я─п╟п╥п╩п╦я┤п╫я▀я┘ я┌п╦п©п╬п╡ п╢п╦п╟пЁя─п╟п╪п╪, п╬п╫п╟
+п╡п╨п╩я▌я┤п╟п╣я┌ п©п╬п╢п╢п╣я─п╤п╨я┐ я│я┌я─я┐п╨я┌я┐я─п╫я▀я┘ я│я┌п╟я┌п╦я┤п╣я│п╨п╦я┘ п╢п╦п╟пЁя─п╟п╪п╪ UML (п╢п╦п╟пЁя─п╟п╪п╪
+п╨п╩п╟я│я│п╬п╡), п╪п╬п╢п╣п╩п╦я─п╬п╡п╟п╫п╦п╣ п╬я┌п╫п╬я┬п╣п╫п╦п╧ п╬п╠я┼п╣п╨я┌п╬п╡ п╦ я│п╣я┌п╣п╡я▀я┘ п╢п╦п╟пЁя─п╟п╪п╪. Dia
+п╪п╬п╤п╣я┌ п╥п╟пЁя─я┐п╤п╟я┌я▄ п╦ я│п╬я┘я─п╟п╫я▐я┌я▄ п╢п╦п╟пЁя─п╟п╪п╪я▀ п╡ я│п╬п╠я│я┌п╡п╣п╫п╫п╬п╪ я└п╬я─п╪п╟я┌п╣ п╦ п╡
+я└п╬я─п╪п╟я┌п╣ .xml п╟ я┌п╟п╨п╤п╣ я█п╨я│п©п╬я─я┌п╦я─п╬п╡п╟я┌я▄ п╦я┘ п╡ PostScript(TM).
 
-%description -l uk
-Програма Dia розроблена як альтернатива Visio для Windows(TM). Dia
-можна використовувати для малювання р╕зноман╕тних тип╕в д╕аграм, вона
-включа╓ п╕дтримку структурних статичних д╕аграм UML (д╕аграм клас╕в),
-моделювання в╕дношень об'╓кт╕в та мережевих д╕аграм. Dia може
-завантажувати та збер╕гати диаграми у власному формат╕ та формат╕ .xml
-а також експортувати ╖х в PostScript(TM).
+%description -l uk.UTF-8
+п÷я─п╬пЁя─п╟п╪п╟ Dia я─п╬п╥я─п╬п╠п╩п╣п╫п╟ я▐п╨ п╟п╩я▄я┌п╣я─п╫п╟я┌п╦п╡п╟ Visio п╢п╩я▐ Windows(TM). Dia
+п╪п╬п╤п╫п╟ п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╡п╟я┌п╦ п╢п╩я▐ п╪п╟п╩я▌п╡п╟п╫п╫я▐ я─я√п╥п╫п╬п╪п╟п╫я√я┌п╫п╦я┘ я┌п╦п©я√п╡ п╢я√п╟пЁя─п╟п╪, п╡п╬п╫п╟
+п╡п╨п╩я▌я┤п╟я■ п©я√п╢я┌я─п╦п╪п╨я┐ я│я┌я─я┐п╨я┌я┐я─п╫п╦я┘ я│я┌п╟я┌п╦я┤п╫п╦я┘ п╢я√п╟пЁя─п╟п╪ UML (п╢я√п╟пЁя─п╟п╪ п╨п╩п╟я│я√п╡),
+п╪п╬п╢п╣п╩я▌п╡п╟п╫п╫я▐ п╡я√п╢п╫п╬я┬п╣п╫я▄ п╬п╠'я■п╨я┌я√п╡ я┌п╟ п╪п╣я─п╣п╤п╣п╡п╦я┘ п╢я√п╟пЁя─п╟п╪. Dia п╪п╬п╤п╣
+п╥п╟п╡п╟п╫я┌п╟п╤я┐п╡п╟я┌п╦ я┌п╟ п╥п╠п╣я─я√пЁп╟я┌п╦ п╢п╦п╟пЁя─п╟п╪п╦ я┐ п╡п╩п╟я│п╫п╬п╪я┐ я└п╬я─п╪п╟я┌я√ я┌п╟ я└п╬я─п╪п╟я┌я√ .xml
+п╟ я┌п╟п╨п╬п╤ п╣п╨я│п©п╬я─я┌я┐п╡п╟я┌п╦ я≈я┘ п╡ PostScript(TM).
 
 %prep
 %setup -q -n %{name}-%{_ver}-%{_extraver}
