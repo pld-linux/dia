@@ -1,10 +1,10 @@
 Summary:	Dia - a GTK+ based diagram creation program
-Summary(es.UTF-8):   Programa para dibujo de diagramas
-Summary(pl.UTF-8):   Dia - program do tworzenia diagramów
-Summary(pt_BR.UTF-8):   Programa para desenho de diagramas
-Summary(ru.UTF-8):   Программа для рисования диаграмм
-Summary(uk.UTF-8):   Програма для малювання діаграм
-Summary(zh_CN.UTF-8):   基于GTK+的流程图程序
+Summary(es.UTF-8):	Programa para dibujo de diagramas
+Summary(pl.UTF-8):	Dia - program do tworzenia diagramów
+Summary(pt_BR.UTF-8):	Programa para desenho de diagramas
+Summary(ru.UTF-8):	Программа для рисования диаграмм
+Summary(uk.UTF-8):	Програма для малювання діаграм
+Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
 %define		_ver	0.96
 %define		_extraver	pre3
