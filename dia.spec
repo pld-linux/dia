@@ -28,7 +28,6 @@ BuildRequires:	intltool >= 0.21
 BuildRequires:	libart_lgpl-devel >= 2.0
 BuildRequires:	libgnomeui-devel >= 2.0.0
 BuildRequires:	libpng-devel
-BuildRequires:	libselinux-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.3.9
