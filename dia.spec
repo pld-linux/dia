@@ -7,25 +7,27 @@ Summary(uk.UTF-8):	Програма для малювання діаграм
 Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
 %define		_ver	0.96
-%define		_extraver	pre3
+%define		_extraver	pre8
 Version:	%{_ver}.%{_extraver}
-Release:	0.5
+Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
 Source0:	ftp://ftp.gnome.org/pub/gnome/sources/dia/%{_ver}/%{name}-%{_ver}-%{_extraver}.tar.bz2
-# Source0-md5:	abcb045a4f0c88d9d91ca2dbcdc7be37
+# Source0-md5:	be81963d7a3bbd64413f2f3db17717b6
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-desktop.patch
 Patch2:		%{name}-gcc4.patch
 URL:		http://www.gnome.org/projects/dia/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
+BuildRequires:	cairo-devel
 BuildRequires:	docbook-utils
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	intltool >= 0.21
 BuildRequires:	libart_lgpl-devel >= 2.0
+BuildRequires:	libgnomeprint-devel >= 2.0.0
 BuildRequires:	libgnomeui-devel >= 2.0.0
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
@@ -105,6 +107,8 @@ PostScript(TM).
 %{__automake}
 %configure \
 	--enable-gnome \
+	--with-gnomeprint \
+	--with-cairo \
 	--with-python
 
 %{__make}
