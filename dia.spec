@@ -101,12 +101,14 @@ PostScript(TM).
 %{__autoheader}
 %{__autoconf}
 %{__automake}
+%{__sed} -i -e 's|/lib/|/%{_lib}/|' configure
 %configure \
 	--enable-gnome \
 	--with-gnomeprint \
 	--with-cairo \
-	--with-python
-
+	--with-python \
+	--with-xslt-prefix=%{_libdir}
+	
 %{__make}
 
 %install
