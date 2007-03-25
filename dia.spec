@@ -6,18 +6,15 @@ Summary(ru.UTF-8):	Программа для рисования диаграмм
 Summary(uk.UTF-8):	Програма для малювання діаграм
 Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
-%define		_ver	0.96
-%define		_extraver	pre8
-Version:	%{_ver}.%{_extraver}
-Release:	0.1
+Version:	0.96
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
-Source0:	ftp://ftp.gnome.org/pub/gnome/sources/dia/%{_ver}/%{name}-%{_ver}-%{_extraver}.tar.bz2
-# Source0-md5:	be81963d7a3bbd64413f2f3db17717b6
+Source0:	ftp://ftp.gnome.org/pub/gnome/sources/dia/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	0c173dd5f46672efb77952ecbd884bfd
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-desktop.patch
-Patch2:		%{name}-gcc4.patch
 URL:		http://www.gnome.org/projects/dia/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -94,10 +91,9 @@ PostScript(TM).
 а також експортувати їх в PostScript(TM).
 
 %prep
-%setup -q -n %{name}-%{_ver}-%{_extraver}
+%setup -q
 %patch0 -p1
 %patch1 -p0
-#%patch2 -p1 -- needs check
 
 %build
 %{__libtoolize}
