@@ -6,13 +6,13 @@ Summary(ru.UTF-8):	Программа для рисования диаграмм
 Summary(uk.UTF-8):	Програма для малювання діаграм
 Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
-Version:	0.96
-Release:	2
+Version:	0.96.1
+Release:	1
 Epoch:		1
 License:	GPL
 Group:		X11/Applications/Graphics
-Source0:	ftp://ftp.gnome.org/pub/gnome/sources/dia/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	0c173dd5f46672efb77952ecbd884bfd
+Source0:	ftp://ftp.gnome.org/pub/gnome/sources/dia/0.96/%{name}-%{version}.tar.bz2
+# Source0-md5:	7b81b22baa2df55efe4845865dddc7b6
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-desktop.patch
 URL:		http://www.gnome.org/projects/dia/
