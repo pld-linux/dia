@@ -9,9 +9,9 @@ Name:		dia
 Version:	0.96.1
 Release:	1
 Epoch:		1
-License:	GPL
+License:	GPL v2+
 Group:		X11/Applications/Graphics
-Source0:	ftp://ftp.gnome.org/pub/gnome/sources/dia/0.96/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/0.96/%{name}-%{version}.tar.bz2
 # Source0-md5:	7b81b22baa2df55efe4845865dddc7b6
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-desktop.patch
