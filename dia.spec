@@ -1,5 +1,6 @@
 Summary:	Dia - a GTK+ based diagram creation program
 Summary(es.UTF-8):	Programa para dibujo de diagramas
+Summary(hu.UTF-8):	Dia - gtk alapú diagram-készítő program
 Summary(pl.UTF-8):	Dia - program do tworzenia diagramów
 Summary(pt_BR.UTF-8):	Programa para desenho de diagramas
 Summary(ru.UTF-8):	Программа для рисования диаграмм
@@ -60,6 +61,13 @@ de entidades y relacionamiento y diagramas de red. El programa Dia usa
 un formato propio de archivo y también puede usar el formato .xml, así
 como también puede exportar para PostScript(TM).
 
+%description -l hu.UTF-8
+Dia egy program, amely a windows-os 'Visio' programhoz hasonló.
+Különféle fajta diagramokat rajzolhatsz. Ebben a verzióban már van
+lehetőség UML struktúra diagramok (osztálydiagramok) és Network
+diagramok készítésére. Többféle fájlformátumot ismer, és képes
+postscript-be exportálni.
+
 %description -l pl.UTF-8
 Dia jest programem zaprojektowanym tak by być podobnym do programu
 'Visio' znanego z Windows. Dia może być używany do rysowania różnego
@@ -114,7 +122,7 @@ mv -f po/sr\@{Latn,latin}.po
 	--with-cairo \
 	--with-python \
 	--with-xslt-prefix=%{_libdir}
-	
+
 %{__make}
 
 %install
