@@ -8,12 +8,34 @@ Summary(uk.UTF-8):	Програма для малювання діаграм
 Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
 Version:	0.96.1
-Release:	5
+Release:	6
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/0.96/%{name}-%{version}.tar.bz2
 # Source0-md5:	7b81b22baa2df55efe4845865dddc7b6
+Source1:	http://dia-installer.de/shapes/central_data_processing/central_data_processing.zip
+# Source1-md5:	103865b35609d2a0f8a0e034c49cf130
+Source2:	http://dia-installer.de/shapes/chemistry_lab/chemistry_lab.zip
+# Source2-md5:	988e4c992f0ca4452c9eb8e224b73adf
+Source3:	http://dia-installer.de/shapes/cmos/cmos.zip
+# Source3-md5:	65f319c9c0c15d0691f9e97fd034c005
+Source4:	http://dia-installer.de/shapes/digital/digital.zip
+# Source4-md5:	8eef8562b618254fc5ebd4ac3f4f15ed
+Source5:	http://dia-installer.de/shapes/edpc/edpc.zip
+# Source5-md5:	3cc6f6eb886715ea7ce1a09bd3a46a5e
+Source6:	http://dia-installer.de/shapes/electronic/electronic.zip
+# Source6-md5:	ddeca421f725af66be41f14ab170b2b8
+Source7:	http://dia-installer.de/shapes/lst/lst.zip
+# Source7-md5:	84d216457305ae53eb1635f6abaa4368
+Source8:	http://dia-installer.de/shapes/optics/optics.zip
+# Source8-md5:	6c2bb1ffa6229b832e2d24fb1fd927c9
+Source9:	http://dia-installer.de/shapes/Racks/Racks.zip
+# Source9-md5:	5ca48da8899b28ed266e21ba522d1e64
+Source10:	http://dia-installer.de/shapes/renewable_energy/renewable_energy.zip
+# Source10-md5:	13e7e934ab87b924101faaf56414ad00
+Source11:	http://dia-installer.de/shapes/scenegraph/scenegraph.zip
+# Source11-md5:	2bca8efa9bae10c13968ebacc9f1a00b
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-desktop.patch
 URL:		http://www.gnome.org/projects/dia/
@@ -135,6 +157,21 @@ rm -rf $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
 
 %find_lang %{name} --with-gnome
+
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE1}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE2}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE3}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE4}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE5}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE6}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE7}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE8}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE9}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE10}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE11}
+
+# Conflicts with Assorted/square.shape
+sed -i "s@Square@Square2@" $RPM_BUILD_ROOT%{_datadir}/%{name}/shapes/chemistry_lab/square.shape
 
 %clean
 rm -rf $RPM_BUILD_ROOT
