@@ -7,13 +7,13 @@ Summary(ru.UTF-8):	Программа для рисования диаграмм
 Summary(uk.UTF-8):	Програма для малювання діаграм
 Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
-Version:	0.96.1
-Release:	6
+Version:	0.97
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/0.96/%{name}-%{version}.tar.bz2
-# Source0-md5:	7b81b22baa2df55efe4845865dddc7b6
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/0.97/%{name}-%{version}.tar.bz2
+# Source0-md5:	3d11f9aaa5a4923f0a5533962c87bdfb
 Source1:	http://dia-installer.de/shapes/central_data_processing/central_data_processing.zip
 # Source1-md5:	103865b35609d2a0f8a0e034c49cf130
 Source2:	http://dia-installer.de/shapes/chemistry_lab/chemistry_lab.zip
@@ -37,17 +37,16 @@ Source10:	http://dia-installer.de/shapes/renewable_energy/renewable_energy.zip
 Source11:	http://dia-installer.de/shapes/scenegraph/scenegraph.zip
 # Source11-md5:	2bca8efa9bae10c13968ebacc9f1a00b
 Patch0:		%{name}-python.patch
-Patch1:		%{name}-desktop.patch
 URL:		http://www.gnome.org/projects/dia/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
-BuildRequires:	cairo-devel
+BuildRequires:	cairo-devel >= 1.0.0
 BuildRequires:	docbook-utils
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.6.0
-BuildRequires:	intltool >= 0.21
+BuildRequires:	intltool >= 0.35.0
+BuildRequires:	libEMF-devel
 BuildRequires:	libart_lgpl-devel >= 2.0
-BuildRequires:	libgnomeprint-devel >= 2.0.0
 BuildRequires:	libgnomeui-devel >= 2.0.0
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
@@ -56,11 +55,14 @@ BuildRequires:	libxml2-devel >= 2.3.9
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
-BuildRequires:	popt-devel
-BuildRequires:	python-PyXML
 BuildRequires:	python-devel >= 1:2.3
 BuildRequires:	python-pygtk-devel
+BuildRequires:	rpmbuild(find_lang) >= 1.23
+BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	rpm-pythonprov
+BuildRequires:	sed >= 4.0
+BuildRequires:	unzip
+BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
 Requires:	python-modules >= 1:2.3
 Requires:	python-pygtk-gtk
@@ -125,10 +127,9 @@ PostScript(TM).
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p0
 
-%{__sed} -i -e s#sr\@Latn#sr\@latin# configure.in
-mv -f po/sr\@{Latn,latin}.po
+%{__sed} -i -e s#sr@Latn#sr@latin# po/LINGUAS
+mv -f po/sr@{Latn,latin}.po
 
 %build
 %{__intltoolize}
@@ -140,8 +141,6 @@ mv -f po/sr\@{Latn,latin}.po
 %{__sed} -i -e 's|/lib/|/%{_lib}/|' configure
 %configure \
 	--enable-gnome \
-	--with-gnomeprint \
-	--with-cairo \
 	--with-python \
 	--with-xslt-prefix=%{_libdir}
 
@@ -151,12 +150,7 @@ mv -f po/sr\@{Latn,latin}.po
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	desktopdir=%{_desktopdir}
-
-rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
-
-%find_lang %{name} --with-gnome
+	DESTDIR=$RPM_BUILD_ROOT
 
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE1}
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE2}
@@ -173,30 +167,32 @@ unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE11}
 # Conflicts with Assorted/square.shape
 sed -i "s@Square@Square2@" $RPM_BUILD_ROOT%{_datadir}/%{name}/shapes/chemistry_lab/square.shape
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/dia/*.la
+%{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
+
+%find_lang %{name} --with-gnome --with-omf
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
 %update_desktop_database_post
+%update_icon_cache hicolor
 
 %postun
 %update_desktop_database_postun
+%update_icon_cache hicolor
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README TODO
-%attr(755,root,root) %{_bindir}/*
-
+%attr(755,root,root) %{_bindir}/dia
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so
-%{_libdir}/dia/lib*.la
-%{_docdir}/dia/*.xml
-%dir %{_docdir}/dia
-%dir %{_docdir}/dia/graphics
-%{_docdir}/dia/graphics/*.png
-
-%{_mandir}/man1/*
-
+%{_docdir}/dia
+%{_mandir}/man1/dia.1*
+%lang(fr) %{_mandir}/fr/man1/dia.1*
+%{_iconsdir}/hicolor/*/*/*.png
+%{_iconsdir}/hicolor/*/*/*.svg
 %{_datadir}/dia
 %{_desktopdir}/dia.desktop
-%{_pixmapsdir}/*
