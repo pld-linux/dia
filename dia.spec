@@ -8,7 +8,7 @@ Summary(uk.UTF-8):	Програма для малювання діаграм
 Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
 Version:	0.97
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
@@ -45,7 +45,6 @@ BuildRequires:	docbook-utils
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	intltool >= 0.35.0
-BuildRequires:	libEMF-devel
 BuildRequires:	libart_lgpl-devel >= 2.0
 BuildRequires:	libgnomeui-devel >= 2.0.0
 BuildRequires:	libpng-devel
@@ -63,7 +62,13 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 BuildRequires:	zlib-devel
+%ifnarch %{x8664}
+BuildRequires:	libEMF-devel
+%else
+BuildConflicts:	libEMF-devel
+%endif
 Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk+2
 Requires:	python-modules >= 1:2.3
 Requires:	python-pygtk-gtk
 # sr@Latn vs. sr@latin
