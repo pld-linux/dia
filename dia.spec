@@ -42,7 +42,6 @@ BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	cairo-devel >= 1.0.0
 BuildRequires:	docbook-style-xsl
-BuildRequires:	docbook-utils
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	intltool >= 0.35.0
@@ -56,10 +55,9 @@ BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
 BuildRequires:	python-devel >= 1:2.3
-BuildRequires:	python-pygtk-devel
+BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
-BuildRequires:	rpm-pythonprov
 BuildRequires:	scrollkeeper
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
