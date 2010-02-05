@@ -7,17 +7,17 @@ Summary(ru.UTF-8):	Программа для рисования диаграмм
 Summary(uk.UTF-8):	Програма для малювання діаграм
 Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
-Version:	0.97
-Release:	3
+Version:	0.97.1
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/0.97/%{name}-%{version}.tar.bz2
-# Source0-md5:	3d11f9aaa5a4923f0a5533962c87bdfb
+# Source0-md5:	57e44bb9f387559a0506b52a134deaf0
 Source1:	http://dia-installer.de/shapes/central_data_processing/central_data_processing.zip
 # Source1-md5:	103865b35609d2a0f8a0e034c49cf130
 Source2:	http://dia-installer.de/shapes/chemistry_lab/chemistry_lab.zip
-# Source2-md5:	988e4c992f0ca4452c9eb8e224b73adf
+# Source2-md5:	ad752d7dfb733b6a9f8c54e05685223c
 Source3:	http://dia-installer.de/shapes/cmos/cmos.zip
 # Source3-md5:	65f319c9c0c15d0691f9e97fd034c005
 Source4:	http://dia-installer.de/shapes/digital/digital.zip
@@ -170,9 +170,6 @@ unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE8}
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE9}
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE10}
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE11}
-
-# Conflicts with Assorted/square.shape
-sed -i "s@Square@Square2@" $RPM_BUILD_ROOT%{_datadir}/%{name}/shapes/chemistry_lab/square.shape
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/dia/*.la
 %{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
