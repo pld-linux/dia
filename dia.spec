@@ -8,7 +8,7 @@ Summary(uk.UTF-8):	Програма для малювання діаграм
 Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
 Version:	0.97.1
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
@@ -30,8 +30,8 @@ Source7:	http://dia-installer.de/shapes/lst/lst.zip
 # Source7-md5:	84d216457305ae53eb1635f6abaa4368
 Source8:	http://dia-installer.de/shapes/optics/optics.zip
 # Source8-md5:	6c2bb1ffa6229b832e2d24fb1fd927c9
-Source9:	http://dia-installer.de/shapes/Racks/Racks.zip
 # Source9-md5:	5ca48da8899b28ed266e21ba522d1e64
+Source9:	http://dia-installer.de/shapes/Racks/Racks.zip
 Source10:	http://dia-installer.de/shapes/renewable_energy/renewable_energy.zip
 # Source10-md5:	13e7e934ab87b924101faaf56414ad00
 Source11:	http://dia-installer.de/shapes/scenegraph/scenegraph.zip
@@ -68,7 +68,7 @@ BuildRequires:	libEMF-devel
 BuildConflicts:	libEMF-devel
 %endif
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	gtk+2
+Requires(post,postun):	gtk-update-icon-cache
 Requires:	python-modules >= 1:2.3
 Requires:	python-pygtk-gtk
 # sr@Latn vs. sr@latin
