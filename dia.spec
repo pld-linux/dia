@@ -7,13 +7,13 @@ Summary(ru.UTF-8):	Программа для рисования диаграмм
 Summary(uk.UTF-8):	Програма для малювання діаграм
 Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
-Version:	0.97.1
-Release:	5
+Version:	0.97.2
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/dia/0.97/%{name}-%{version}.tar.bz2
-# Source0-md5:	57e44bb9f387559a0506b52a134deaf0
+Source0:	http://ftp.gnome.org/pub/gnome/sources/dia/0.97/%{name}-%{version}.tar.xz
+# Source0-md5:	1e1180a513fb567709b09bc19f12105e
 Source1:	http://dia-installer.de/shapes/central_data_processing/central_data_processing.zip
 # Source1-md5:	103865b35609d2a0f8a0e034c49cf130
 Source2:	http://dia-installer.de/shapes/chemistry_lab/chemistry_lab.zip
@@ -23,7 +23,7 @@ Source3:	http://dia-installer.de/shapes/cmos/cmos.zip
 Source4:	http://dia-installer.de/shapes/digital/digital.zip
 # Source4-md5:	8eef8562b618254fc5ebd4ac3f4f15ed
 Source5:	http://dia-installer.de/shapes/edpc/edpc.zip
-# Source5-md5:	3cc6f6eb886715ea7ce1a09bd3a46a5e
+# Source5-md5:	6d62a586419b5ed616cc2a67f80a2e3d
 Source6:	http://dia-installer.de/shapes/electronic/electronic.zip
 # Source6-md5:	ddeca421f725af66be41f14ab170b2b8
 Source7:	http://dia-installer.de/shapes/lst/lst.zip
@@ -37,6 +37,7 @@ Source10:	http://dia-installer.de/shapes/renewable_energy/renewable_energy.zip
 Source11:	http://dia-installer.de/shapes/scenegraph/scenegraph.zip
 # Source11-md5:	2bca8efa9bae10c13968ebacc9f1a00b
 Patch0:		%{name}-python.patch
+Patch1:		%{name}-wmf-cast.patch
 URL:		http://www.gnome.org/projects/dia/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -45,6 +46,7 @@ BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	intltool >= 0.35.0
+BuildRequires:	libEMF-devel
 BuildRequires:	libart_lgpl-devel >= 2.0
 BuildRequires:	libgnomeui-devel >= 2.0.0
 BuildRequires:	libpng-devel
@@ -62,11 +64,6 @@ BuildRequires:	scrollkeeper
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 BuildRequires:	zlib-devel
-%ifnarch %{x8664}
-BuildRequires:	libEMF-devel
-%else
-BuildConflicts:	libEMF-devel
-%endif
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	python-modules >= 1:2.3
@@ -132,6 +129,7 @@ PostScript(TM).
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %{__sed} -i -e s#sr@Latn#sr@latin# po/LINGUAS
 mv -f po/sr@{Latn,latin}.po
