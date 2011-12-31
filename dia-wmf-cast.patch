@@ -1,0 +1,11 @@
+--- dia-0.97.2/plug-ins/wmf/wmf.cpp~	2011-03-13 14:07:48.000000000 +0100
++++ dia-0.97.2/plug-ins/wmf/wmf.cpp	2011-12-31 14:23:18.047623497 +0100
+@@ -1273,7 +1273,7 @@
+         renderer->use_pango = FALSE;
+ #endif
+     } else {
+-        renderer->hPrintDC = (W32::HDC)user_data;
++        renderer->hPrintDC = *((W32::HDC*)user_data);
+         renderer->use_pango = (user_data != NULL); // always for printing
+     }
+ 
