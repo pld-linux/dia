@@ -1,27 +1,36 @@
-diff -urN dia-0.93-pre3.orig/acinclude.m4 dia-0.93-pre3/acinclude.m4
---- dia-0.93-pre3.orig/acinclude.m4	2004-04-16 11:49:20.275636288 +0200
-+++ dia-0.93-pre3/acinclude.m4	2004-04-16 11:55:01.459768416 +0200
-@@ -214,7 +214,7 @@
+--- dia-0.97.2/acinclude.m4~	2011-03-20 12:18:13.000000000 +0100
++++ dia-0.97.2/acinclude.m4	2011-12-31 13:03:18.989732048 +0100
+@@ -224,30 +224,13 @@
  [AC_REQUIRE([AM_PATH_PYTHON])
  AC_REQUIRE([AM_CHECK_PYTHON_HEADERS])
  
 -AC_MSG_CHECKING(for libpython${PYTHON_VERSION}.a)
 +AC_MSG_CHECKING(for libpython${PYTHON_VERSION})
  
- py_config_dir=`$PYTHON -c "import os; print os.path.abspath('$pyexecdir/../config')"`
+ py_config_dir="$py_prefix/$py_lib/python${PYTHON_VERSION}/config"
  
-@@ -225,13 +225,8 @@
-   py_basemodlibs=`sed -n -e 's/^BASEMODLIBS=\(.*\)/\1/p' $py_makefile`
-   py_other_libs=`sed -n -e 's/^LIBS=\(.*\)/\1/p' $py_makefile`
- 
+ py_makefile="${py_config_dir}/Makefile"
+-if test -f "$py_makefile"; then
+-dnl extra required libs
+-  py_basemodlibs=`sed -n -e 's/^BASEMODLIBS=\(.*\)/\1/p' $py_makefile`
+-  py_other_libs=`sed -n -e 's/^LIBS=\(.*\)/\1/p' $py_makefile`
+-
 -dnl now the actual libpython
--  if test -e "${py_config_dir}/libpython${PYTHON_VERSION}.a"; then
--    PYTHON_LIBS="-L${py_config_dir} -lpython${PYTHON_VERSION} $py_localmodlibs $py_basemodlibs $py_other_libs"
-+    PYTHON_LIBS="-lpython${PYTHON_VERSION} $py_localmodlibs $py_basemodlibs $py_other_libs"
-     AC_MSG_RESULT(found)
+-  if test -e "$PYTHON_PREFIX/${py_lib}/libpython${PYTHON_VERSION}.so"; then
+-    PYTHON_LIBS="-L${py_config_dir} -lpython${PYTHON_VERSION} $py_basemodlibs $py_other_libs"
+-    AC_MSG_RESULT(found)
+-  elif test -e "${py_prefix}/${py_lib}/libpython${PYTHON_VERSION}.a"; then
+-    dnl Same as above, but looking into the previous location: bug #581533
+-    PYTHON_LIBS="-L${py_config_dir} -lpython${PYTHON_VERSION} $py_basemodlibs $py_other_libs"
+-    AC_MSG_RESULT(found)
 -  else
--    AC_MSG_RESULT(not found)
+-    AC_MSG_RESULT(not found lib)
 -  fi
- else
-   AC_MSG_RESULT(not found)
- fi
+-else
+-  AC_MSG_RESULT(not found config)
+-fi
++PYTHON_LIBS="-lpython${PYTHON_VERSION} $py_basemodlibs $py_other_libs"
++AC_MSG_RESULT(found)
+ AC_SUBST(PYTHON_LIBS)])
+ 
+ # We need this because freetype is optional
