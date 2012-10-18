@@ -38,6 +38,7 @@ Source11:	http://dia-installer.de/shapes/scenegraph/scenegraph.zip
 # Source11-md5:	2bca8efa9bae10c13968ebacc9f1a00b
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-wmf-cast.patch
+Patch2:		%{name}-glib2.patch
 URL:		http://www.gnome.org/projects/dia/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -130,6 +131,7 @@ PostScript(TM).
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %{__sed} -i -e s#sr@Latn#sr@latin# po/LINGUAS
 mv -f po/sr@{Latn,latin}.po
