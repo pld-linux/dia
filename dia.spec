@@ -39,7 +39,7 @@ Source11:	http://dia-installer.de/shapes/scenegraph/scenegraph.zip
 Patch0:		%{name}-python.patch
 Patch1:		%{name}-wmf-cast.patch
 Patch2:		%{name}-glib2.patch
-URL:		http://www.gnome.org/projects/dia/
+URL:		https://live.gnome.org/Dia
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	cairo-devel >= 1.0.0
