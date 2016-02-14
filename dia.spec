@@ -7,13 +7,13 @@ Summary(ru.UTF-8):	Программа для рисования диаграмм
 Summary(uk.UTF-8):	Програма для малювання діаграм
 Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
-Version:	0.97.2
-Release:	8
+Version:	0.97.3
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
 Source0:	http://ftp.gnome.org/pub/gnome/sources/dia/0.97/%{name}-%{version}.tar.xz
-# Source0-md5:	1e1180a513fb567709b09bc19f12105e
+# Source0-md5:	0e744a0f6a6c4cb6a089e4d955392c3c
 Source1:	http://dia-installer.de/shapes/central_data_processing/central_data_processing.zip
 # Source1-md5:	103865b35609d2a0f8a0e034c49cf130
 Source2:	http://dia-installer.de/shapes/chemistry_lab/chemistry_lab.zip
@@ -36,10 +36,7 @@ Source10:	http://dia-installer.de/shapes/renewable_energy/renewable_energy.zip
 # Source10-md5:	13e7e934ab87b924101faaf56414ad00
 Source11:	http://dia-installer.de/shapes/scenegraph/scenegraph.zip
 # Source11-md5:	2bca8efa9bae10c13968ebacc9f1a00b
-Patch0:		%{name}-python.patch
-Patch1:		%{name}-wmf-cast.patch
-Patch2:		%{name}-glib2.patch
-Patch3:		%{name}-glib.patch
+Patch0:		%{name}-wmf-cast.patch
 URL:		https://live.gnome.org/Dia
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -131,9 +128,6 @@ PostScript(TM).
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 %{__sed} -i -e s#sr@Latn#sr@latin# po/LINGUAS
 mv -f po/sr@{Latn,latin}.po
@@ -147,6 +141,7 @@ mv -f po/sr@{Latn,latin}.po
 %{__automake}
 %{__sed} -i -e 's|/lib/|/%{_lib}/|' configure
 %configure \
+	--disable-silent-rules \
 	--enable-gnome \
 	--with-python \
 	--with-xslt-prefix=%{_libdir}
