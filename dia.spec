@@ -36,6 +36,26 @@ Source10:	http://dia-installer.de/shapes/renewable_energy/renewable_energy.zip
 # Source10-md5:	13e7e934ab87b924101faaf56414ad00
 Source11:	http://dia-installer.de/shapes/scenegraph/scenegraph.zip
 # Source11-md5:	2bca8efa9bae10c13968ebacc9f1a00b
+Source12:	http://dia-installer.de/shapes/gradient/gradient.zip
+# Source12-md5:	74cf1befc74dd2775780664c3bbf5f6f
+Source13:	http://dia-installer.de/shapes/HVAC/HVAC.zip
+# Source13-md5:	8789f851c6bc464977d991de28464076
+Source14:	http://dia-installer.de/shapes/Electrical/Electrical.zip
+# Source14-md5:	5c5abbc16025b31a6d317dbd472d8d78
+Source15:	http://dia-installer.de/shapes/electric2/electric2.zip
+# Source15-md5:	0853a35f5df120d2eae441de107fd57a
+Source16:	http://dia-installer.de/shapes/Circuit2/Circuit2.zip
+# Source16-md5:	d3d03e2ec873daa8a368e83823b5c9c1
+Source17:	http://dia-installer.de/shapes/CH-1/CH-1.zip
+# Source17-md5:	0e30c10b308c9dbab56ac445067bc983
+Source18:	http://dia-installer.de/shapes/building_site/building_site.zip
+# Source18-md5:	5ba58c82686b845c3026bcb770c55850
+Source19:	http://dia-installer.de/shapes/AUTOSAR/AUTOSAR.zip
+# Source19-md5:	16593b97d1c76d31891923abd4b4925f
+Source20:	http://dia-installer.de/shapes/Automata/Automata.zip
+# Source20-md5:	82f60fe376fcbe238b46d60e2dfdf355
+Source21:	http://dia-installer.de/shapes/value_stream_mapping/value_stream_mapping.zip
+# Source21-md5:	98705330f435f06c7a8864b543ef4617
 Patch0:		%{name}-wmf-cast.patch
 URL:		https://live.gnome.org/Dia
 BuildRequires:	autoconf >= 2.50
@@ -165,6 +185,16 @@ unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE8}
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE9}
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE10}
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE11}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE12}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE13}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE14}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE15}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE16}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE17}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE18}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE19}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE20}
+unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE21}
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/dia/*.la
 %{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
