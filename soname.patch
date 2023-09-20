@@ -1,0 +1,10 @@
+--- dia-399526892d86d7e00e2f565e6c50b73c1195c810/lib/meson.build~	2023-09-16 11:51:53.000000000 +0200
++++ dia-399526892d86d7e00e2f565e6c50b73c1195c810/lib/meson.build	2023-09-20 02:54:39.959839397 +0200
+@@ -239,6 +239,7 @@
+     c_args: ['-Wall', '-DLIBDIA_COMPILATION'],
+     vs_module_defs: 'libdia.def',
+     install: true,
++    version: meson.project_version(),
+ )
+ 
+ libdia_dep = declare_dependency (include_directories: libdia_inc,

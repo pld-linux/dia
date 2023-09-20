@@ -8,12 +8,14 @@ Summary(uk.UTF-8):	Програма для малювання діаграм
 Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
 Version:	0.97.3
+%define	gitref	399526892d86d7e00e2f565e6c50b73c1195c810
+%define	snap	20230920
 Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
-Source0:	http://ftp.gnome.org/pub/gnome/sources/dia/0.97/%{name}-%{version}.tar.xz
-# Source0-md5:	0e744a0f6a6c4cb6a089e4d955392c3c
+Source0:	https://gitlab.gnome.org/GNOME/dia/-/archive/%{gitref}/%{name}-%{snap}.tar.bz2
+# Source0-md5:	a22cfc481bb22461ca63dc47e1693411
 Source1:	http://dia-installer.de/shapes/central_data_processing/central_data_processing.zip
 # Source1-md5:	103865b35609d2a0f8a0e034c49cf130
 Source2:	http://dia-installer.de/shapes/chemistry_lab/chemistry_lab.zip
@@ -57,36 +59,40 @@ Source20:	http://dia-installer.de/shapes/Automata/Automata.zip
 Source21:	http://dia-installer.de/shapes/value_stream_mapping/value_stream_mapping.zip
 # Source21-md5:	98705330f435f06c7a8864b543ef4617
 Patch0:		%{name}-wmf-cast.patch
+Patch1:		soname.patch
+Patch2:		emf-detect.patch
 URL:		https://live.gnome.org/Dia
-BuildRequires:	autoconf >= 2.50
-BuildRequires:	automake
+#Library emf found: NO
+#Library ogdf found: NO
 BuildRequires:	cairo-devel >= 1.0.0
+BuildRequires:	dblatex
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext-tools
+BuildRequires:	graphene-devel
 BuildRequires:	gtk+2-devel >= 2:2.6.0
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libEMF-devel
-BuildRequires:	libart_lgpl-devel >= 2.0
-BuildRequires:	libgnomeui-devel >= 2.0.0
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.3.9
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
 BuildRequires:	pkgconfig
-BuildRequires:	python-devel >= 1:2.3
+BuildRequires:	poppler-cpp-devel
+BuildRequires:	poppler-devel
+BuildRequires:	poppler-progs
+BuildRequires:	python3-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(find_lang) >= 1.23
-BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:  rpmbuild(macros) >= 1.726
 BuildRequires:	scrollkeeper
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
-Requires:	python-modules >= 1:2.3
-Requires:	python-pygtk-gtk
+Requires:	python3-modules >= 1:2.3
+Requires:	python3-pygobject3
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -146,33 +152,25 @@ PostScript(TM).
 а також експортувати їх в PostScript(TM).
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{gitref}
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
-%{__sed} -i -e s#sr@Latn#sr@latin# po/LINGUAS
-mv -f po/sr@{Latn,latin}.po
+%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python(\s|$),#!%{__python3}\1,' -e '1s,#!\s*/usr/bin/python(\s|$),#!%{__python3}\1,' \
+      plug-ins/python/doxrev.py \
+      plug-ins/python/gtkcons.py
 
 %build
-%{__intltoolize}
-%{__libtoolize}
-%{__aclocal}
-%{__autoheader}
-%{__autoconf}
-%{__automake}
-%{__sed} -i -e 's|/lib/|/%{_lib}/|' configure
-%configure \
-	--disable-silent-rules \
-	--enable-gnome \
-	--with-python \
-	--with-xslt-prefix=%{_libdir}
+%meson --default-library=shared build \
+	-Dtests=false
 
-%{__make}
+%ninja_build -C build \
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+%ninja_install -C build
 
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE1}
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE2}
@@ -196,9 +194,6 @@ unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE19}
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE20}
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE21}
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/dia/*.la
-%{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
-
 %find_lang %{name} --with-gnome --with-omf
 
 %clean
@@ -214,14 +209,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README TODO
+%doc AUTHORS MAINTAINERS NEWS README.md TODO
 %attr(755,root,root) %{_bindir}/dia
+%attr(755,root,root) %{_libdir}/libdia.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libdia.so.0
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so
 %{_docdir}/dia
 %{_mandir}/man1/dia.1*
-%lang(fr) %{_mandir}/fr/man1/dia.1*
-%{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/hicolor/*/*/*.svg
 %{_datadir}/dia
-%{_desktopdir}/dia.desktop
+%{_desktopdir}/org.gnome.Dia.desktop
+%{_datadir}/metainfo/org.gnome.Dia.appdata.xml
+%{_datadir}/thumbnailers/org.gnome.Dia.thumbnailer
