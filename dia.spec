@@ -77,6 +77,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libxml2-devel >= 2.3.9
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
+BuildRequires:	meson
 BuildRequires:	pkgconfig
 BuildRequires:	poppler-cpp-devel
 BuildRequires:	poppler-devel
@@ -84,7 +85,7 @@ BuildRequires:	poppler-progs
 BuildRequires:	python3-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(find_lang) >= 1.23
-BuildRequires:  rpmbuild(macros) >= 1.726
+BuildRequires:	rpmbuild(macros) >= 1.726
 BuildRequires:	scrollkeeper
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
