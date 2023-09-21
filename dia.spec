@@ -7,9 +7,9 @@ Summary(ru.UTF-8):	Программа для рисования диаграмм
 Summary(uk.UTF-8):	Програма для малювання діаграм
 Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
-Version:	0.97.3
 %define	gitref	399526892d86d7e00e2f565e6c50b73c1195c810
 %define	snap	20230920
+Version:	0.97.3.%{snap}
 Release:	1
 Epoch:		1
 License:	GPL v2+
