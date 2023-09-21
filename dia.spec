@@ -10,7 +10,7 @@ Name:		dia
 %define	gitref	399526892d86d7e00e2f565e6c50b73c1195c810
 %define	snap	20230920
 Version:	0.97.3.%{snap}
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
@@ -92,6 +92,7 @@ BuildRequires:	unzip
 BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
+Requires(post,postun):	/sbin/ldconfig
 Requires:	python3-modules >= 1:2.3
 Requires:	python3-pygobject3
 # sr@Latn vs. sr@latin
@@ -195,16 +196,21 @@ unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE19}
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE20}
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE21}
 
+# fix typo in gradient white_gray_horizontal.shape
+%{__sed} -i 's/white_gray_horzontal/white_gray_horizontal/g' $RPM_BUILD_ROOT%{_datadir}/%{name}/shapes/gradient/white_gray_horizontal.shape
+
 %find_lang %{name} --with-gnome --with-omf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
+/sbin/ldconfig
 %update_desktop_database_post
 %update_icon_cache hicolor
 
 %postun
+/sbin/ldconfig
 %update_desktop_database_postun
 %update_icon_cache hicolor
 
