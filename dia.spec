@@ -1,3 +1,5 @@
+# TODO:
+#Library ogdf found: NO
 Summary:	Dia - a GTK+ based diagram creation program
 Summary(es.UTF-8):	Programa para dibujo de diagramas
 Summary(hu.UTF-8):	Dia - gtk alapú diagram-készítő program
@@ -10,7 +12,7 @@ Name:		dia
 %define	gitref	399526892d86d7e00e2f565e6c50b73c1195c810
 %define	snap	20230920
 Version:	0.97.3.%{snap}
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
@@ -62,31 +64,30 @@ Patch0:		%{name}-wmf-cast.patch
 Patch1:		soname.patch
 Patch2:		emf-detect.patch
 URL:		https://live.gnome.org/Dia
-#Library emf found: NO
-#Library ogdf found: NO
 BuildRequires:	cairo-devel >= 1.0.0
 BuildRequires:	dblatex
 BuildRequires:	docbook-style-xsl
 BuildRequires:	gettext-tools
-BuildRequires:	graphene-devel
-BuildRequires:	gtk+2-devel >= 2:2.6.0
+BuildRequires:	glib2-devel >= 1:2.70
+BuildRequires:	graphene-devel >= 1.10
+BuildRequires:	gtk+2-devel >= 2:2.24.31
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libEMF-devel
 BuildRequires:	libpng-devel
-BuildRequires:	libstdc++-devel
-BuildRequires:	libxml2-devel >= 2.3.9
+BuildRequires:	libstdc++-devel >= 6:8
+BuildRequires:	libxml2-devel >= 1:2.9.4
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
-BuildRequires:	meson
+BuildRequires:	meson >= 0.58
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
-BuildRequires:	poppler-cpp-devel
-BuildRequires:	poppler-devel
-BuildRequires:	poppler-progs
+BuildRequires:	poppler-cpp-devel >= 0.62.1
+BuildRequires:	poppler-devel >= 0.62.1
+BuildRequires:	poppler-progs >= 0.62.1
 BuildRequires:	python3-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(find_lang) >= 1.23
-BuildRequires:	rpmbuild(macros) >= 1.726
-BuildRequires:	scrollkeeper
+BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
 BuildRequires:	zlib-devel
@@ -159,15 +160,17 @@ PostScript(TM).
 %patch1 -p1
 %patch2 -p1
 
-%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python(\s|$),#!%{__python3}\1,' -e '1s,#!\s*/usr/bin/python(\s|$),#!%{__python3}\1,' \
-      plug-ins/python/doxrev.py \
-      plug-ins/python/gtkcons.py
+%{__sed} -i -e '1s,/usr/bin/env python$,%{__python},' \
+	plug-ins/python/doxrev.py \
+	plug-ins/python/gtkcons.py
 
 %build
-%meson --default-library=shared build \
+CXXFLAGS="%{rpmcxxflags} -std=c++2a"
+%meson build \
+	--default-library=shared \
 	-Dtests=false
 
-%ninja_build -C build \
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -199,7 +202,7 @@ unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE21}
 # fix typo in gradient white_gray_horizontal.shape
 %{__sed} -i 's/white_gray_horzontal/white_gray_horizontal/g' $RPM_BUILD_ROOT%{_datadir}/%{name}/shapes/gradient/white_gray_horizontal.shape
 
-%find_lang %{name} --with-gnome --with-omf
+%find_lang %{name} --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -222,10 +225,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libdia.so.0
 %dir %{_libdir}/dia
 %attr(755,root,root) %{_libdir}/dia/lib*.so
-%{_docdir}/dia
-%{_mandir}/man1/dia.1*
-%{_iconsdir}/hicolor/*/*/*.svg
 %{_datadir}/dia
-%{_desktopdir}/org.gnome.Dia.desktop
 %{_datadir}/metainfo/org.gnome.Dia.appdata.xml
 %{_datadir}/thumbnailers/org.gnome.Dia.thumbnailer
+%{_desktopdir}/org.gnome.Dia.desktop
+%{_iconsdir}/hicolor/scalable/apps/org.gnome.Dia.svg
+%{_iconsdir}/hicolor/symbolic/apps/org.gnome.Dia-symbolic.svg
+%{_docdir}/dia
+%{_mandir}/man1/dia.1*
