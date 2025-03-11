@@ -156,9 +156,9 @@ PostScript(TM).
 
 %prep
 %setup -q -n %{name}-%{gitref}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%patch -P 0 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env python$,%{__python},' \
 	plug-ins/python/doxrev.py \
