@@ -9,15 +9,15 @@ Summary(ru.UTF-8):	Программа для рисования диаграмм
 Summary(uk.UTF-8):	Програма для малювання діаграм
 Summary(zh_CN.UTF-8):	基于GTK+的流程图程序
 Name:		dia
-%define	gitref	399526892d86d7e00e2f565e6c50b73c1195c810
-%define	snap	20230920
-Version:	0.97.3.%{snap}
-Release:	4
+%define	gitref	6b20252f45b1410e3e17528a9600358f688004ed
+%define	snap	20250311
+Version:	0.98.0
+Release:	0.%{snap}.1
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
 Source0:	https://gitlab.gnome.org/GNOME/dia/-/archive/%{gitref}/%{name}-%{snap}.tar.bz2
-# Source0-md5:	a22cfc481bb22461ca63dc47e1693411
+# Source0-md5:	2187873abe217dc542fda9ed3cd75c72
 Source1:	http://dia-installer.de/shapes/central_data_processing/central_data_processing.zip
 # Source1-md5:	103865b35609d2a0f8a0e034c49cf130
 Source2:	http://dia-installer.de/shapes/chemistry_lab/chemistry_lab.zip
@@ -62,8 +62,7 @@ Source21:	http://dia-installer.de/shapes/value_stream_mapping/value_stream_mappi
 # Source21-md5:	98705330f435f06c7a8864b543ef4617
 Patch0:		%{name}-wmf-cast.patch
 Patch1:		soname.patch
-Patch2:		emf-detect.patch
-URL:		https://live.gnome.org/Dia
+URL:		https://wiki.gnome.org/Apps/Dia
 BuildRequires:	cairo-devel >= 1.0.0
 BuildRequires:	dblatex
 BuildRequires:	docbook-style-xsl
@@ -90,6 +89,7 @@ BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.736
 BuildRequires:	sed >= 4.0
 BuildRequires:	unzip
+BuildRequires:	xpm-pixbuf-devel
 BuildRequires:	zlib-devel
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
@@ -158,24 +158,22 @@ PostScript(TM).
 %setup -q -n %{name}-%{gitref}
 %patch -P 0 -p1
 %patch -P 1 -p1
-%patch -P 2 -p1
 
-%{__sed} -i -e '1s,/usr/bin/env python$,%{__python},' \
+%{__sed} -i -e '1s,/usr/bin/env python$,%{__python3},' \
 	plug-ins/python/doxrev.py \
 	plug-ins/python/gtkcons.py
 
 %build
-CXXFLAGS="%{rpmcxxflags} -std=c++2a"
-%meson build \
+%meson \
 	--default-library=shared \
 	-Dtests=false
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE1}
 unzip -n -d $RPM_BUILD_ROOT%{_datadir}/%{name} %{SOURCE2}
