@@ -12,7 +12,7 @@ Name:		dia
 %define	gitref	6b20252f45b1410e3e17528a9600358f688004ed
 %define	snap	20250311
 Version:	0.98.0
-Release:	0.%{snap}.1
+Release:	0.%{snap}.2
 Epoch:		1
 License:	GPL v2+
 Group:		X11/Applications/Graphics
